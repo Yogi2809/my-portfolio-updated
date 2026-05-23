@@ -1,118 +1,119 @@
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
-import { eyebrowBoneNames, typingBoneNames } from "../../../data/boneData";
+import { eyebrowBoneNames } from "../../../data/boneData";
 
 const setAnimations = (gltf: GLTF) => {
-  let character = gltf.scene;
-  let mixer = new THREE.AnimationMixer(character);
-  if (gltf.animations) {
-    const introClip = gltf.animations.find(
-      (clip) => clip.name === "introAnimation"
+  const character = gltf.scene;
+  const mixer = new THREE.AnimationMixer(character);
+
+  // Log what's available for debugging
+  if (gltf.animations?.length) {
+    console.log(
+      "[setAnimations] Available clips:",
+      gltf.animations.map((c) => c.name)
     );
-    const introAction = mixer.clipAction(introClip!);
-    introAction.setLoop(THREE.LoopOnce, 1);
-    introAction.clampWhenFinished = true;
-    introAction.play();
-    const clipNames = ["key1", "key2", "key5", "key6"];
-    clipNames.forEach((name) => {
+
+    // Try RPM standard idle clips
+    const tryPlay = (name: string) => {
       const clip = THREE.AnimationClip.findByName(gltf.animations, name);
       if (clip) {
-        const action = mixer?.clipAction(clip);
-        action!.play();
-        action!.timeScale = 1.2;
-      } else {
-        console.error(`Animation "${name}" not found`);
+        mixer.clipAction(clip).play();
+        return true;
+      }
+      return false;
+    };
+    tryPlay("idle") || tryPlay("Idle") || tryPlay("mixamo.com");
+  }
+
+  function startIntro() {
+    // Intro is driven by GSAP in GsapScroll.ts via CSS opacity/transform
+    // If a named intro clip exists, play it
+    if (!gltf.animations?.length) return;
+    const introClip = THREE.AnimationClip.findByName(
+      gltf.animations,
+      "introAnimation"
+    );
+    if (introClip) {
+      const introAction = mixer.clipAction(introClip);
+      introAction.setLoop(THREE.LoopOnce, 1);
+      introAction.clampWhenFinished = true;
+      introAction.reset().play();
+    }
+  }
+
+  function hover(_gltf: GLTF, hoverDiv: HTMLDivElement) {
+    // Try morph-target eyebrow raise on any SkinnedMesh
+    let faceMesh: THREE.SkinnedMesh | null = null;
+    character.traverse((child) => {
+      if (!faceMesh && (child as THREE.SkinnedMesh).morphTargetDictionary) {
+        faceMesh = child as THREE.SkinnedMesh;
       }
     });
-    let typingAction: THREE.AnimationAction | null = null;
-    typingAction = createBoneAction(gltf, mixer, "typing", typingBoneNames);
-    if (typingAction) {
-      typingAction.enabled = true;
-      typingAction.play();
-      typingAction.timeScale = 1.2;
+
+    // Fallback: try bone-based eyebrow if morph not available
+    let eyeBrowAction: THREE.AnimationAction | null = null;
+    if (gltf.animations?.length) {
+      const browClip = THREE.AnimationClip.findByName(gltf.animations, "browup");
+      if (browClip) {
+        const filteredTracks = browClip.tracks.filter((t) =>
+          eyebrowBoneNames.some((bn) => t.name.includes(bn))
+        );
+        const filteredClip = new THREE.AnimationClip(
+          "browup_filtered",
+          browClip.duration,
+          filteredTracks
+        );
+        eyeBrowAction = mixer.clipAction(filteredClip);
+        eyeBrowAction.setLoop(THREE.LoopOnce, 1);
+        eyeBrowAction.clampWhenFinished = true;
+        eyeBrowAction.enabled = true;
+      }
     }
-  }
-  function startIntro() {
-    const introClip = gltf.animations.find(
-      (clip) => clip.name === "introAnimation"
-    );
-    const introAction = mixer.clipAction(introClip!);
-    introAction.clampWhenFinished = true;
-    introAction.reset().play();
-    setTimeout(() => {
-      const blink = gltf.animations.find((clip) => clip.name === "Blink");
-      mixer.clipAction(blink!).play().fadeIn(0.5);
-    }, 2500);
-  }
-  function hover(gltf: GLTF, hoverDiv: HTMLDivElement) {
-    let eyeBrowUpAction = createBoneAction(
-      gltf,
-      mixer,
-      "browup",
-      eyebrowBoneNames
-    );
+
     let isHovering = false;
-    if (eyeBrowUpAction) {
-      eyeBrowUpAction.setLoop(THREE.LoopOnce, 1);
-      eyeBrowUpAction.clampWhenFinished = true;
-      eyeBrowUpAction.enabled = true;
-    }
-    const onHoverFace = () => {
-      if (eyeBrowUpAction && !isHovering) {
-        isHovering = true;
-        eyeBrowUpAction.reset();
-        eyeBrowUpAction.enabled = true;
-        eyeBrowUpAction.setEffectiveWeight(4);
-        eyeBrowUpAction.fadeIn(0.5).play();
+
+    const onEnter = () => {
+      if (isHovering) return;
+      isHovering = true;
+      // Morph target approach
+      if (faceMesh?.morphTargetDictionary && faceMesh.morphTargetInfluences) {
+        const idx =
+          (faceMesh.morphTargetDictionary["browInnerUp"] ??
+            faceMesh.morphTargetDictionary["eyebrowUp"] ??
+            -1) as number;
+        if (idx >= 0) faceMesh.morphTargetInfluences[idx] = 1;
+      }
+      // Bone clip approach
+      if (eyeBrowAction) {
+        eyeBrowAction.reset();
+        eyeBrowAction.setEffectiveWeight(4);
+        eyeBrowAction.fadeIn(0.5).play();
       }
     };
-    const onLeaveFace = () => {
-      if (eyeBrowUpAction && isHovering) {
-        isHovering = false;
-        eyeBrowUpAction.fadeOut(0.6);
+
+    const onLeave = () => {
+      if (!isHovering) return;
+      isHovering = false;
+      if (faceMesh?.morphTargetDictionary && faceMesh.morphTargetInfluences) {
+        const idx =
+          (faceMesh.morphTargetDictionary["browInnerUp"] ??
+            faceMesh.morphTargetDictionary["eyebrowUp"] ??
+            -1) as number;
+        if (idx >= 0) faceMesh.morphTargetInfluences[idx] = 0;
       }
+      if (eyeBrowAction) eyeBrowAction.fadeOut(0.6);
     };
+
     if (!hoverDiv) return;
-    hoverDiv.addEventListener("mouseenter", onHoverFace);
-    hoverDiv.addEventListener("mouseleave", onLeaveFace);
+    hoverDiv.addEventListener("mouseenter", onEnter);
+    hoverDiv.addEventListener("mouseleave", onLeave);
     return () => {
-      hoverDiv.removeEventListener("mouseenter", onHoverFace);
-      hoverDiv.removeEventListener("mouseleave", onLeaveFace);
+      hoverDiv.removeEventListener("mouseenter", onEnter);
+      hoverDiv.removeEventListener("mouseleave", onLeave);
     };
   }
+
   return { mixer, startIntro, hover };
-};
-
-const createBoneAction = (
-  gltf: GLTF,
-  mixer: THREE.AnimationMixer,
-  clip: string,
-  boneNames: string[]
-): THREE.AnimationAction | null => {
-  const AnimationClip = THREE.AnimationClip.findByName(gltf.animations, clip);
-  if (!AnimationClip) {
-    console.error(`Animation "${clip}" not found in GLTF file.`);
-    return null;
-  }
-
-  const filteredClip = filterAnimationTracks(AnimationClip, boneNames);
-
-  return mixer.clipAction(filteredClip);
-};
-
-const filterAnimationTracks = (
-  clip: THREE.AnimationClip,
-  boneNames: string[]
-): THREE.AnimationClip => {
-  const filteredTracks = clip.tracks.filter((track) =>
-    boneNames.some((boneName) => track.name.includes(boneName))
-  );
-
-  return new THREE.AnimationClip(
-    clip.name + "_filtered",
-    clip.duration,
-    filteredTracks
-  );
 };
 
 export default setAnimations;
