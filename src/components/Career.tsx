@@ -12,62 +12,76 @@ const Career = () => {
           <div className="career-timeline">
             <div className="career-dot"></div>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Co-Founder</h4>
-                <h5>CallHQ.ai</h5>
+                <h4>AI/Technical Program Manager</h4>
+                <h5>Cars24 · Gurugram</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Building CallHQ.ai, a voice AI platform for
-              automating customer calls, support, and conversions.
+              Led 3-pod Agile delivery for a 12-engineer team. Shipped
+              price-negotiation voicebot (3,500+ calls/day, ~33% conversion),
+              LLM chatbot QA pipeline, Pre-Inspection analytics dashboard, and
+              Zendesk automations (1,500+ tickets/month). Managed ECS→EKS and
+              Bitbucket→GitHub migrations end-to-end.
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Adobe</h4>
-                <h5>6+ years · Noida</h5>
+                <h4>Research Analyst</h4>
+                <h5>99acres.com · Noida</h5>
               </div>
-              <h3>2017–24</h3>
+              <h3>2024</h3>
             </div>
             <p>
-              Senior Lead Software Engineer (Feb 2024 – May 2024). Lead Software
-              Engineer (Feb 2021 – Feb 2024). Software Engineer II (Dec 2017 –
-              Feb 2021): internationalization, globalization, and localization for
-              Adobe Technical Communication Suite; functional and linguistic testing
-              strategy; in-house tooling; collaboration with product and engineering
-              for high-quality localized releases.
+              Analyzed 24,000+ property listings using Google Maps, RERA, and
+              government datasets for geospatial and data quality validation.
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Consultant</h4>
-                <h5>Genpact Headstrong </h5>
+                <h4>Power BI &amp; SQL Intern</h4>
+                <h5>CODTECH IT Solutions · Gwalior</h5>
               </div>
-              <h3>2016–17</h3>
+              <h3>2024</h3>
             </div>
             <p>
-              Sep 2016 – Nov 2017. Developed and maintained WCF services consumed
-              by the UI; deployment support across environments; NUnit tests and
-              coverage; bug fixes from QA and users; database work.
+              Built Sales, HR, and Marketing ROI dashboards in Power BI; wrote
+              SQL queries for data extraction and reporting across 3 business
+              functions.
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Sf Engineer</h4>
-                <h5>Infogain</h5>
+                <h4>MBA — Business Analytics</h4>
+                <h5>PIMR, Gwalior</h5>
               </div>
-              <h3>2013-16</h3>
+              <h3>2023–25</h3>
             </div>
             <p>
-              Software engineering across enterprise projects, contributing to
-              design, development, and delivery of business applications.
+              Specialization in Business Analytics. Atlassian Agile Project
+              Management Professional Certificate.
             </p>
+          </div>
+
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>B.Sc — Mathematics</h4>
+                <h5>Jiwaji University, Gwalior</h5>
+              </div>
+              <h3>2019–22</h3>
+            </div>
+            <p>Bachelor of Science in Mathematics, Jiwaji University.</p>
           </div>
         </div>
       </div>

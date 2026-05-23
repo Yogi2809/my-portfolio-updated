@@ -11,27 +11,31 @@ const Contact = () => {
             <h4>Connect</h4>
             <p>
               <a
-                href="https://www.linkedin.com/in/akashrmalhotra/"
+                href="https://www.linkedin.com/in/yogesh-mishra-pm/"
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="disable"
               >
-                LinkedIn — akashrmalhotra
+                LinkedIn — yogesh-mishra-pm
+              </a>
+            </p>
+            <p>
+              <a
+                href="mailto:yogesh.mishra080202@gmail.com"
+                data-cursor="disable"
+              >
+                yogesh.mishra080202@gmail.com
               </a>
             </p>
             <h4>Education</h4>
-            <p>
-              PGPWE (MBA), Indian Institute of Management, Lucknow — 2021–2023
-            </p>
-            <p>
-              B.Tech Computer Science, Manav Rachna Educational Institutions —
-              2009–2013
-            </p>
+            <p>MBA in Business Analytics, PIMR, Gwalior — 2023–2025</p>
+            <p>B.Sc in Mathematics, Jiwaji University, Gwalior — 2019–2022</p>
+            <p>Atlassian Agile Project Management Professional Certificate</p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/akashrmalhotra"
+              href="https://github.com/Yogi2809"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -40,7 +44,7 @@ const Contact = () => {
               GitHub <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com/in/akashrmalhotra/"
+              href="https://www.linkedin.com/in/yogesh-mishra-pm/"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -48,28 +52,10 @@ const Contact = () => {
             >
               LinkedIn <MdArrowOutward />
             </a>
-            <a
-              href="https://www.youtube.com/@Leftbraincoder"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              YouTube <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.instagram.com/leftbraincoder/"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Instagram <MdArrowOutward />
-            </a>
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Akash Malhotra</span>
+              Portfolio of <br /> <span>Yogesh Mishra</span>
             </h2>
             <h5>
               <MdCopyright /> 2026

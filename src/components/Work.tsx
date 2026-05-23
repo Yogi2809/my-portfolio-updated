@@ -5,32 +5,26 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "CallHQ",
-    category: "Voice AI Calling Platform",
-    tools: "Voice AI, Calling Automation, CRM Integrations",
-    image: "/images/callhq.png",
-    link: "https://callhq.ai",
+    title: "ChallanBot",
+    category: "Challan Automation Panel · Cars24 (Under Testing)",
+    tools:
+      "Independently designed and built using Claude AI and Figma. Takes an Appointment ID, auto-fetches vehicle details via GET API, then runs automated checks across government websites to retrieve traffic challans for 60+ QC operators.",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/Yogi2809/challan-fetch-automation",
   },
   {
-    title: "Whatsapp Automation",
-    category: "WABA Application",
-    tools: "WhatsApp Business API, Workflow Automation, Notifications",
-    image: "/images/whatsapp.png",
-    link: "https://whatsapp.callhq.ai",
+    title: "ConvoAudit",
+    category: "LLM Chatbot QA Pipeline · Cars24",
+    tools:
+      "Processes 225 sessions/day (~7,000 rows), classifies 10+ intent/issue categories, generates daily QA reports in 15–30 min. Replaced 2 analysts spending 8 hrs/day on 30–40 manual cases.",
+    image: "/images/placeholder.webp",
   },
   {
-    title: "Broki",
-    category: "Real Estate Platform for FnB Industry",
-    tools: "Property Discovery, Lead Management, Marketplace Workflows",
-    image: "/images/broki.png",
-    link: "https://broki.in",
-  },
-  {
-    title: "Orrdr.com",
-    category: "Ecommerce Platform and Mobile App",
-    tools: "Ecommerce, Mobile Experience, Order Management",
-    image: "/images/orrdr.png",
-    link: "https://orrdr.com",
+    title: "PreInspect AI",
+    category: "Conversational Analytics Dashboard · Cars24",
+    tools:
+      "Tracks 2,700 sessions/month with sentiment cross-filter, cancellation funnel, and regional drill-downs. Primary monitoring tool for CeX and Inspection team leadership.",
+    image: "/images/placeholder.webp",
   },
 ];
 
@@ -64,11 +58,10 @@ const Work = () => {
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
-          My <span>Work</span>
+          Key <span>Projects</span>
         </h2>
 
         <div className="carousel-wrapper">
-          {/* Navigation Arrows */}
           <button
             className="carousel-arrow carousel-arrow-left"
             onClick={goToPrev}
@@ -86,13 +79,10 @@ const Work = () => {
             <MdArrowForward />
           </button>
 
-          {/* Slides */}
           <div className="carousel-track-container">
             <div
               className="carousel-track"
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-              }}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {projects.map((project, index) => (
                 <div className="carousel-slide" key={index}>
@@ -103,11 +93,9 @@ const Work = () => {
                       </div>
                       <div className="carousel-details">
                         <h4>{project.title}</h4>
-                        <p className="carousel-category">
-                          {project.category}
-                        </p>
+                        <p className="carousel-category">{project.category}</p>
                         <div className="carousel-tools">
-                          <span className="tools-label">Tools & Features</span>
+                          <span className="tools-label">About</span>
                           <p>{project.tools}</p>
                         </div>
                       </div>
@@ -125,13 +113,13 @@ const Work = () => {
             </div>
           </div>
 
-          {/* Dot Indicators */}
           <div className="carousel-dots">
             {projects.map((_, index) => (
               <button
                 key={index}
-                className={`carousel-dot ${index === currentIndex ? "carousel-dot-active" : ""
-                  }`}
+                className={`carousel-dot ${
+                  index === currentIndex ? "carousel-dot-active" : ""
+                }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to project ${index + 1}`}
                 data-cursor="disable"
