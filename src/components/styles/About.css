@@ -9,25 +9,65 @@
   width: var(--cWidth);
   margin: auto;
 }
+
 .about-me {
   padding: 50px 0px;
   padding-bottom: 0;
   width: 500px;
   max-width: calc(100% - 15px);
 }
+
 .about-me h3 {
-  font-size: 25px;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 7px;
+  letter-spacing: 5px;
   font-weight: 400;
   color: var(--accentColor);
+  margin-bottom: 20px;
 }
 
 .about-me p {
   font-size: 33px;
   font-weight: 600;
   line-height: 36px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  color: #eae5ec;
+}
+
+/* ── Stat pills ── */
+.about-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px;
+  border: 1px solid rgba(94, 234, 212, 0.2);
+  border-radius: 10px;
+  background: rgba(94, 234, 212, 0.04);
+  backdrop-filter: blur(4px);
+  min-width: 90px;
+}
+
+.about-stat-num {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accentColor);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.about-stat-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(234, 229, 236, 0.55);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
 }
 
 @media only screen and (min-width: 600px) {
@@ -35,16 +75,19 @@
     justify-content: center;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .about-me {
     width: 500px;
     max-width: calc(100% - 70px);
     transform: translateY(0%);
   }
+
   .about-section {
     opacity: 1;
   }
 }
+
 @media only screen and (min-width: 1025px) {
   .about-section {
     width: var(--cWidth);
@@ -54,15 +97,30 @@
     padding: 0px;
     opacity: 1;
   }
+
   .about-me {
     padding: 0px;
-    width: 50%;
+    width: 46%;
   }
+
   .about-me p {
-    font-size: 1.9vw;
-    line-height: 2.3vw;
+    font-size: 1.85vw;
+    line-height: 2.2vw;
+  }
+
+  .about-stat-num {
+    font-size: 1.6vw;
+  }
+
+  .about-stat-sub {
+    font-size: 0.75vw;
+  }
+
+  .about-stat {
+    padding: 12px 18px;
   }
 }
+
 @media only screen and (min-width: 1950px) {
   .about-me p {
     font-size: 2.5rem;

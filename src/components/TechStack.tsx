@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
+// N8AO removed — caused black occlusion patches on white balls
 import {
   BallCollider,
   Physics,
@@ -11,23 +11,56 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
-const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/figma.png",
-  "/images/jira.png",
-  "/images/openai.png",
-  "/images/claude.png",
-  "/images/powerbi.png",
-  "/images/sql.png",
-  "/images/playwright.png",
-  "/images/git.png",
-  "/images/vercel.png",
+const toolNames = [
+  "Figma",
+  "Jira",
+  "OpenAI",
+  "Claude AI",
+  "Power BI",
+  "SQL",
+  "Playwright",
+  "Git",
+  "Vercel",
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+function createTextTexture(name: string): THREE.CanvasTexture {
+  const size = 512;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d")!;
 
-const spheres = [...Array(30)].map(() => ({
+  // Pure white ball — no teal ring (was causing color fringing on seams)
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.arc(size / 2, size / 2, size / 2 - 2, 0, Math.PI * 2);
+  ctx.fill();
+
+  // High-contrast navy text for clear legibility on white
+  ctx.fillStyle = "#0d1b2a";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  const words = name.split(" ");
+  if (words.length > 1) {
+    ctx.font = "bold 72px Arial, sans-serif";
+    ctx.fillText(words[0], size / 2, size / 2 - 38);
+    ctx.fillText(words[1], size / 2, size / 2 + 44);
+  } else {
+    const fontSize = name.length > 7 ? 68 : 80;
+    ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+    ctx.fillText(name, size / 2, size / 2);
+  }
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.needsUpdate = true;
+  return tex;
+}
+
+const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+
+// Reduced from 30 → 20 spheres for better performance
+const spheres = [...Array(20)].map(() => ({
   scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
 }));
 
@@ -35,7 +68,7 @@ type SphereProps = {
   vec?: THREE.Vector3;
   scale: number;
   r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
+  material: THREE.MeshStandardMaterial;
   isActive: boolean;
 };
 
@@ -61,7 +94,6 @@ function SphereGeo({
           -50 * delta * scale
         )
       );
-
     api.current?.applyImpulse(impulse, true);
   });
 
@@ -81,12 +113,9 @@ function SphereGeo({
         args={[0.15 * scale, 0.275 * scale]}
       />
       <mesh
-        castShadow
-        receiveShadow
         scale={scale}
         geometry={sphereGeometry}
         material={material}
-        rotation={[0.3, 1, 1]}
       />
     </RigidBody>
   );
@@ -130,83 +159,76 @@ const TechStack = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
+      const workEl = document.getElementById("work");
+      if (!workEl) return;
+      const threshold = workEl.getBoundingClientRect().top;
+      setIsActive(threshold < window.innerHeight);
     };
     document.querySelectorAll(".header a").forEach((elem) => {
       const element = elem as HTMLAnchorElement;
       element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
+        const interval = setInterval(handleScroll, 10);
+        setTimeout(() => clearInterval(interval), 1000);
       });
     });
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
+    return toolNames.map((name) => {
+      const texture = createTextTexture(name);
+      return new THREE.MeshStandardMaterial({
+        map: texture,
+        color: "#ffffff",
+        // Higher roughness = diffuse/matte look, prevents dark mirror patches
+        // Lower metalness = no strong HDR color reflections (teal/pink fringing)
+        roughness: 0.55,
+        metalness: 0.0,
+      });
+    });
   }, []);
 
   return (
     <div className="techstack">
-      <h2> My Toolkit</h2>
+      <h2>My Toolkit</h2>
 
       <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+        // No shadows — removes the spotLight shadow map and per-mesh shadow cost
+        gl={{ alpha: true, stencil: false, antialias: false }}
+        // depth:false removed — N8AO needs a depth buffer; without it, AO outputs black patches
         camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+        onCreated={(state) => (state.gl.toneMappingExposure = 1.2)}
         className="tech-canvas"
       >
-        <ambientLight intensity={1} />
+        <ambientLight intensity={1.8} />
+        {/* No castShadow on spotLight — saves shadow-map GPU cost */}
         <spotLight
           position={[20, 20, 25]}
           penumbra={1}
           angle={0.2}
           color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
+          intensity={1.2}
         />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
+        <directionalLight position={[0, 5, -4]} intensity={1.2} />
         <Physics gravity={[0, 0, 0]}>
           <Pointer isActive={isActive} />
           {spheres.map((props, i) => (
             <SphereGeo
               key={i}
               {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
+              material={materials[i % materials.length]}
               isActive={isActive}
             />
           ))}
         </Physics>
+        {/* Very low environmentIntensity — just enough for soft fill, no teal reflections */}
         <Environment
           files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
+          environmentIntensity={0.05}
           environmentRotation={[0, 4, 2]}
         />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
+        {/* N8AO removed — it caused black blobs at ball intersections when depth:false was set */}
       </Canvas>
     </div>
   );

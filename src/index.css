@@ -93,7 +93,7 @@ body {
 }
 
 .split-line {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .split-h2 {
@@ -122,6 +122,13 @@ body {
   left: 0;
   font-weight: 400;
   text-transform: uppercase;
+  font-family: "Geist", sans-serif;
+  background: linear-gradient(0deg, #0d9488, #ffffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin: 0;
 }
 
 @media screen and (min-width: 768px) {

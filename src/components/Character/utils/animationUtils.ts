@@ -6,23 +6,25 @@ const setAnimations = (gltf: GLTF) => {
   const character = gltf.scene;
   const mixer = new THREE.AnimationMixer(character);
 
-  // Log what's available for debugging
   if (gltf.animations?.length) {
-    console.log(
-      "[setAnimations] Available clips:",
-      gltf.animations.map((c) => c.name)
-    );
-
-    // Try RPM standard idle clips
+    // Try named idle clips first; fall back to the first clip in the file
     const tryPlay = (name: string) => {
       const clip = THREE.AnimationClip.findByName(gltf.animations, name);
       if (clip) {
-        mixer.clipAction(clip).play();
+        const action = mixer.clipAction(clip);
+        action.setLoop(THREE.LoopRepeat, Infinity);
+        action.play();
         return true;
       }
       return false;
     };
-    tryPlay("idle") || tryPlay("Idle") || tryPlay("mixamo.com");
+
+    if (!tryPlay("idle") && !tryPlay("Idle") && !tryPlay("mixamo.com")) {
+      // Play the first available clip as the idle/pose animation
+      const action = mixer.clipAction(gltf.animations[0]);
+      action.setLoop(THREE.LoopRepeat, Infinity);
+      action.play();
+    }
   }
 
   function startIntro() {

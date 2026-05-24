@@ -3,6 +3,7 @@ import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
 const setLighting = (scene: THREE.Scene) => {
+  // Rim / back light (original - teal accent from behind)
   const directionalLight = new THREE.DirectionalLight(0x5eead4, 0);
   directionalLight.intensity = 0;
   directionalLight.position.set(-0.47, -0.32, -1);
@@ -12,6 +13,16 @@ const setLighting = (scene: THREE.Scene) => {
   directionalLight.shadow.camera.near = 0.5;
   directionalLight.shadow.camera.far = 50;
   scene.add(directionalLight);
+
+  // Front key light — illuminates face and torso from camera direction
+  const frontLight = new THREE.DirectionalLight(0xffffff, 0);
+  frontLight.position.set(0.3, 1.8, 4);
+  scene.add(frontLight);
+
+  // Soft fill from the right
+  const fillLight = new THREE.DirectionalLight(0xb0e8ff, 0);
+  fillLight.position.set(2, 1.5, 2);
+  scene.add(fillLight);
 
   const pointLight = new THREE.PointLight(0x22d3ee, 0, 100, 3);
   pointLight.position.set(3, 12, 4);
@@ -45,6 +56,16 @@ const setLighting = (scene: THREE.Scene) => {
     });
     gsap.to(directionalLight, {
       intensity: 1,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(frontLight, {
+      intensity: 1.8,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(fillLight, {
+      intensity: 0.7,
       duration: duration,
       ease: ease,
     });

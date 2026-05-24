@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import setCharacter from "./utils/character";
 import setLighting from "./utils/lighting";
@@ -18,7 +18,6 @@ const Scene = () => {
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
-  const [_character, setChar] = useState<THREE.Object3D | null>(null);
 
   useEffect(() => {
     if (!canvasDiv.current) return;
@@ -28,22 +27,26 @@ const Scene = () => {
     const aspect = container.width / container.height;
     const scene = sceneRef.current;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    // logarithmicDepthBuffer eliminates Z-fighting on face/hair/beard meshes
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      logarithmicDepthBuffer: true,
+    });
     renderer.setSize(container.width, container.height);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
+    // Do NOT enable shadowMap — no shadow lights are set up; enabling it causes mesh artefacts
     canvasDiv.current.appendChild(renderer.domElement);
 
-    const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
-    camera.position.set(0, 13.1, 24.7);
-    camera.zoom = 1.1;
+    const camera = new THREE.PerspectiveCamera(20, aspect, 0.1, 100);
+    camera.position.set(0, 1.55, 3.2);
+    camera.lookAt(0, 1.35, 0);
     camera.updateProjectionMatrix();
 
-    // Use 'Head' bone (RPM standard) instead of 'spine006'
+    // Head bone for mouse-follow tracking
     let headBone: THREE.Object3D | null = null;
-    // Spine bone for procedural breathing
-    let spineBone: THREE.Object3D | null = null;
     let mixer: THREE.AnimationMixer;
 
     const clock = new THREE.Clock();
@@ -57,21 +60,13 @@ const Scene = () => {
       if (hoverDivRef.current) animations.hover(gltf, hoverDivRef.current);
       mixer = animations.mixer;
       const char = gltf.scene;
-      setChar(char);
       scene.add(char);
 
-      // RPM head bone name is 'Head'; fallback to legacy names
+      // RPM head bone — used only for subtle mouse-follow head turn
       headBone =
         char.getObjectByName("Head") ||
         char.getObjectByName("head") ||
         char.getObjectByName("spine006") ||
-        null;
-
-      // Breathing bone: prefer Spine2, then Spine1, then Spine
-      spineBone =
-        char.getObjectByName("Spine2") ||
-        char.getObjectByName("Spine1") ||
-        char.getObjectByName("Spine") ||
         null;
 
       progress.loaded().then(() => {
@@ -118,9 +113,12 @@ const Scene = () => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
       const delta = clock.getDelta();
 
+      // Mixer must update FIRST so animation clip values are written to bones
+      if (mixer) mixer.update(delta);
+
+      // Head tracking applied AFTER mixer so it overrides the clip's head value
       if (headBone) {
         handleHeadRotation(
           headBone,
@@ -132,12 +130,6 @@ const Scene = () => {
         );
       }
 
-      // Procedural breathing animation on spine
-      if (spineBone) {
-        spineBone.scale.y = 1 + Math.sin(elapsed * 0.85) * 0.008;
-      }
-
-      if (mixer) mixer.update(delta);
       renderer.render(scene, camera);
     };
     animate();

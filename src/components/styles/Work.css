@@ -82,8 +82,8 @@
 }
 
 .carousel-category {
-  font-weight: 200;
-  color: #adacac;
+  font-weight: 300;
+  color: #c8c6ca;
   margin: 0;
   font-size: 16px;
 }
@@ -101,10 +101,11 @@
 }
 
 .carousel-tools p {
-  font-weight: 200;
-  color: #adacac;
+  font-weight: 300;
+  color: #d0cdd3;
   margin: 6px 0 0;
   font-size: 15px;
+  line-height: 1.6;
 }
 
 .carousel-image-wrapper {
@@ -178,6 +179,91 @@
   background: var(--accentColor);
   border-color: var(--accentColor);
   box-shadow: 0 0 8px rgba(94, 234, 212, 0.4);
+}
+
+/* ── GitHub link ── */
+.project-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--accentColor);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(94, 234, 212, 0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.3s;
+}
+
+.project-github-link:hover {
+  border-color: var(--accentColor);
+  color: var(--accentColor);
+}
+
+/* ── Project card placeholder (for text-only projects) ── */
+.project-card-placeholder {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 280px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(10,14,23,0.9) 0%, rgba(20,28,46,0.95) 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.project-card-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(var(--card-accent-rgb, 94, 234, 212), 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.project-card-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+  opacity: 0.06;
+  padding: 0;
+}
+
+.project-card-cell {
+  border: 1px solid rgba(94, 234, 212, 0.5);
+}
+
+.project-card-label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-card-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.project-card-label p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #eae5ec;
+  letter-spacing: 0.5px;
 }
 
 /* ── Work Image (reused) ── */

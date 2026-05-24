@@ -111,9 +111,10 @@
   position: absolute;
   max-width: 1920px;
   max-height: 1080px;
-  transform: translateX(-50%);
+  /* Use left:0 instead of left:50%+translateX(-50%) so GSAP x animations
+     start from the correct origin and don't cause a position jump on scroll */
+  left: 0;
   width: 100%;
-  left: 50%;
   z-index: 0;
   bottom: 50px;
   pointer-events: inherit;

@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import "./styles/Work.css";
-import WorkImage from "./WorkImage";
-import { MdArrowBack, MdArrowForward } from "react-icons/md";
+import { MdArrowBack, MdArrowForward, MdArrowOutward } from "react-icons/md";
 
 const projects = [
   {
@@ -9,24 +8,47 @@ const projects = [
     category: "Challan Automation Panel · Cars24 (Under Testing)",
     tools:
       "Independently designed and built using Claude AI and Figma. Takes an Appointment ID, auto-fetches vehicle details via GET API, then runs automated checks across government websites to retrieve traffic challans for 60+ QC operators.",
-    image: "/images/placeholder.webp",
+    image: "/images/challanbot.png",
     link: "https://github.com/Yogi2809/challan-fetch-automation",
+    accent: "#5eead4",
   },
   {
     title: "ConvoAudit",
     category: "LLM Chatbot QA Pipeline · Cars24",
     tools:
       "Processes 225 sessions/day (~7,000 rows), classifies 10+ intent/issue categories, generates daily QA reports in 15–30 min. Replaced 2 analysts spending 8 hrs/day on 30–40 manual cases.",
-    image: "/images/placeholder.webp",
+    image: null,
+    accent: "#818cf8",
   },
   {
     title: "PreInspect AI",
     category: "Conversational Analytics Dashboard · Cars24",
     tools:
       "Tracks 2,700 sessions/month with sentiment cross-filter, cancellation funnel, and regional drill-downs. Primary monitoring tool for CeX and Inspection team leadership.",
-    image: "/images/placeholder.webp",
+    image: null,
+    accent: "#f472b6",
   },
 ];
+
+const ProjectCard = ({
+  title,
+  accent,
+}: {
+  title: string;
+  accent: string;
+}) => (
+  <div className="project-card-placeholder" style={{ "--card-accent": accent } as React.CSSProperties}>
+    <div className="project-card-grid">
+      {[...Array(12)].map((_, i) => (
+        <div key={i} className="project-card-cell" />
+      ))}
+    </div>
+    <div className="project-card-label">
+      <span className="project-card-dot" style={{ background: accent }} />
+      <p>{title}</p>
+    </div>
+  </div>
+);
 
 const Work = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -98,14 +120,40 @@ const Work = () => {
                           <span className="tools-label">About</span>
                           <p>{project.tools}</p>
                         </div>
+                        {project.link && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="project-github-link"
+                            data-cursor="disable"
+                          >
+                            View on GitHub <MdArrowOutward />
+                          </a>
+                        )}
                       </div>
                     </div>
                     <div className="carousel-image-wrapper">
-                      <WorkImage
-                        image={project.image}
-                        alt={project.title}
-                        link={project.link}
-                      />
+                      {project.image ? (
+                        <div className="work-image">
+                          <a
+                            className="work-image-in"
+                            href={project.link}
+                            target="_blank"
+                            data-cursor="disable"
+                            rel="noreferrer"
+                          >
+                            {project.link && (
+                              <div className="work-link">
+                                <MdArrowOutward />
+                              </div>
+                            )}
+                            <img src={project.image} alt={project.title} />
+                          </a>
+                        </div>
+                      ) : (
+                        <ProjectCard title={project.title} accent={project.accent} />
+                      )}
                     </div>
                   </div>
                 </div>

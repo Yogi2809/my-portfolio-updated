@@ -8,8 +8,13 @@
   opacity: 1;
   height: auto;
   margin: auto;
-  margin-bottom: 250px;
+  margin-bottom: 100px;
   padding: 120px 0px;
+}
+
+.career-section-education {
+  padding-top: 60px;
+  margin-bottom: 250px;
 }
 
 .career-section h2 {
@@ -59,10 +64,11 @@
 }
 
 .career-info h3 {
-  font-size: 48px;
+  font-size: 32px;
   margin: 0;
   font-weight: 500;
-  line-height: 45px;
+  line-height: 32px;
+  white-space: nowrap;
 }
 
 .career-info h4 {
@@ -159,7 +165,7 @@
   }
 
   .career-info h3 {
-    font-size: 40px;
+    font-size: 28px;
   }
 
   .career-info-box p {
@@ -225,7 +231,7 @@
   }
 
   .career-info h3 {
-    font-size: 33px;
+    font-size: 24px;
   }
 
   .career-info-in,

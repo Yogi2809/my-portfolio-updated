@@ -1,5 +1,11 @@
 import "./styles/About.css";
 
+const highlights = [
+  { label: "3,500+", sub: "calls/day" },
+  { label: "225", sub: "sessions audited/day" },
+  { label: "12", sub: "engineers led" },
+];
+
 const About = () => {
   return (
     <div className="about-section" id="about">
@@ -13,6 +19,14 @@ const About = () => {
           product, engineering, and business to get things from requirement to
           production.
         </p>
+        <div className="about-stats">
+          {highlights.map((h) => (
+            <div className="about-stat" key={h.label}>
+              <span className="about-stat-num">{h.label}</span>
+              <span className="about-stat-sub">{h.sub}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

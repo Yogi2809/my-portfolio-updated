@@ -3,6 +3,7 @@ import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
 import Cursor from "./Cursor";
+import HeroOverlay from "./HeroOverlay";
 import Landing from "./Landing";
 import LetsConnect from "./LetsConnect";
 import Navbar from "./Navbar";
@@ -36,6 +37,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Navbar />
       <SocialIcons />
       {isDesktopView && children}
+      {isDesktopView && <HeroOverlay />}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="container-main">
