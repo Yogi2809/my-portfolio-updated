@@ -568,8 +568,15 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: var(--gutter);
   margin-top: 56px;
-  align-items: start;
+  align-items: stretch;
 }
+/* Left box spans both right rows → it's exactly as tall as the two stacked
+   right boxes, with bottoms aligned. No flex/percentage circularity. */
+.resume-cell { display: flex; flex-direction: column; }
+.resume-cell > .panel { flex: 1; }
+.resume-cell--main { grid-column: 1; grid-row: 1 / span 2; }
+.resume-cell--actions { grid-column: 2; grid-row: 1; }
+.resume-cell--comp { grid-column: 2; grid-row: 2; }
 .resume-summary {
   padding: 30px 32px;
   margin-bottom: var(--gutter);
@@ -583,7 +590,13 @@
   font-weight: 500;
 }
 .resume-summary p { color: var(--text); font-size: 15.5px; line-height: 1.65; }
-.resume-main { padding: 36px 32px; }
+.resume-main {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
 .resume-main h3 { font-size: 20px; margin-bottom: 18px; }
 .resume-highlights { margin: 0 0 30px; padding: 0; display: grid; gap: 13px; }
 .resume-highlights li {
@@ -616,7 +629,15 @@
 .resume-edu { margin-top: 26px; display: grid; gap: 14px; }
 .resume-edu b { display: block; font-size: 14.5px; }
 .resume-edu span { color: var(--muted); font-size: 13px; }
-@media (max-width: 880px) { .resume-grid { grid-template-columns: 1fr; } }
+@media (max-width: 880px) {
+  .resume-grid { grid-template-columns: 1fr; }
+  .resume-cell--main,
+  .resume-cell--actions,
+  .resume-cell--comp {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
 
 /* ════ Contact ══════════════════════════════════════════════════════════ */
 .contact {
