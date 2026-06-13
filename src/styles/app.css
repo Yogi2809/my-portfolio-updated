@@ -372,9 +372,16 @@
   grid-template-columns: repeat(2, 1fr);
   gap: var(--gutter);
   margin-top: 56px;
-  align-items: start;
+  align-items: stretch;
 }
-.skill-cluster { padding: 28px; cursor: pointer; }
+.skill-cluster {
+  padding: 28px;
+  cursor: pointer;
+  height: 100%;
+  /* Floor so collapsed cards are uniform across every row, regardless of
+     whether a description wraps to one or two lines. */
+  min-height: 144px;
+}
 .skill-cluster-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .skill-cluster h3 { font-size: 20px; }
 .skill-cluster .summary { color: var(--muted); font-size: 14.5px; margin-top: 8px; }

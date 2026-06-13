@@ -3,7 +3,9 @@ import { skillClusters } from "../data/content";
 import Reveal from "../components/Reveal";
 
 const Skills = () => {
-  const [expanded, setExpanded] = useState<number | null>(0);
+  // Start with all clusters collapsed so the grid loads as a clean, uniform
+  // set of equal-height cards (no card stretched to match an expanded sibling).
+  const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
     <section className="section" id="skills">

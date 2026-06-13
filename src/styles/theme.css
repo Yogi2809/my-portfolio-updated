@@ -160,6 +160,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .operate-grid > .reveal > .panel,
 .init-grid > .reveal > a,
+.skills-grid > .reveal > .panel,
 .gallery-grid > .reveal > .panel,
 .dash-grid > .reveal > .panel {
   height: 100%;
