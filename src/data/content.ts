@@ -409,7 +409,7 @@ export interface ExperienceEntry {
 export const experience: ExperienceEntry[] = [
   {
     org: "CARS24",
-    role: "Program Management Intern",
+    role: "AI & Technology Program Manager",
     period: "Jan 2025 — Present",
     mission:
       "Work across AI workflows, business logic, technical teams, and execution — improving chatbot and voicebot flows, refining prompts, auditing conversations, and automating repetitive work.",
@@ -432,7 +432,7 @@ export const experience: ExperienceEntry[] = [
   },
   {
     org: "99acres (Info Edge India)",
-    role: "Taxonomist",
+    role: "Research Analyst",
     period: "Jul 2024",
     mission:
       "Bring structure to property-listing data through taxonomy design — the information architecture that search and discovery depend on.",
