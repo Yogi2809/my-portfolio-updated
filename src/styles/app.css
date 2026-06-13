@@ -73,7 +73,8 @@
   grid-template-columns: 1.05fr 1fr;
   gap: 40px;
   align-items: center;
-  width: 100%;
+  /* No width:100% here — it would override .container's centered max-width and
+     push the hero content flush against the viewport edges on wide screens. */
 }
 .hero-eyebrow {
   font-size: 13px;
