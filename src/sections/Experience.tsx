@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { experience, galleryArtifacts } from "../data/content";
 import Reveal from "../components/Reveal";
+import TiltCard from "../components/TiltCard";
 
 const Experience = () => (
   <section className="section" id="experience">
@@ -67,7 +68,7 @@ const Experience = () => (
         <div className="gallery-grid">
           {galleryArtifacts.map((art, i) => (
             <Reveal key={art.title} delay={i * 70}>
-              <div className="panel gallery-card">
+              <TiltCard className="panel gallery-card" max={6}>
                 <div className="gallery-type">{art.type}</div>
                 <h4>{art.title}</h4>
                 <p>{art.description}</p>
@@ -81,7 +82,7 @@ const Experience = () => (
                     </Fragment>
                   ))}
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

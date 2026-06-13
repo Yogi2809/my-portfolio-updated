@@ -1,30 +1,33 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // All portfolio content lives here. Components are pure renderers.
-// Every number and claim is sourced from the actual resume — no fabrications.
+// Honest, early-career (1.5–2 yr) AI & Technology Program Manager framing.
+// Avoids inflated/senior claims — accurate to real hands-on experience.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const identity = {
   name: "Yogesh Mishra",
   role: "AI & Technology Program Manager",
-  headline: "Building Systems That Turn AI Into Business Impact",
+  headline: "AI & Technology Program Manager",
   subheadline:
-    "AI & Technology Program Manager focused on aligning strategy, people, processes, and technology to deliver meaningful outcomes.",
+    "I design, test, and improve AI-powered workflows by combining business logic, prompt iteration, conversational testing, and AI-assisted automation.",
+  supporting:
+    "Focused on chatbot and voicebot flows, workflow automation, prompt refinement, conversation audits, and cross-functional execution.",
   email: "yogesh.mishra080202@gmail.com",
   github: "https://github.com/Yogi2809",
   linkedin: "https://www.linkedin.com/in/yogesh-mishra-pm",
   resumePdf: "/Yogesh_Mishra_PM_Resume.pdf",
-  calendly: "https://calendly.com/yogesh-mishra080202", // placeholder — update when live
 };
 
+// Honest hero chips — what I actually do, no inflated counts
 export const heroMetrics = [
-  { value: "3", label: "Agile PODs Run" },
-  { value: "12", label: "Engineers Coordinated" },
-  { value: "2", label: "AI Products Shipped" },
-  { value: "E2E", label: "QA Automation Owned" },
-  { value: "LLM", label: "Eval Pipelines Built" },
+  { value: "E2E", label: "Chatbot & Voicebot Flows Tested" },
+  { value: "Prompt", label: "Iterative Refinement" },
+  { value: "LLM", label: "Conversation Audits" },
+  { value: "Playwright", label: "Browser Automation" },
+  { value: "Cross-fn", label: "Execution Coordination" },
 ];
 
-// ── How I Operate ────────────────────────────────────────────────────────────
+// ── How I Work With AI, Teams, and Workflows ─────────────────────────────────
 export interface OperatingStep {
   step: string;
   title: string;
@@ -35,45 +38,45 @@ export interface OperatingStep {
 export const operatingModel: OperatingStep[] = [
   {
     step: "01",
-    title: "Discover",
+    title: "Understand",
     description:
-      "Start with the problem, not the solution. I dig into business context, user pain, and stakeholder constraints before anything gets built.",
-    practices: ["Stakeholder interviews", "Requirement gathering", "Competitive context"],
+      "I start with the business requirement — what the team actually needs the AI to do, who the user is, and where the current flow breaks.",
+    practices: ["Requirement understanding", "Stakeholder questions", "User-journey context"],
   },
   {
     step: "02",
-    title: "Align",
+    title: "Map the Logic",
     description:
-      "Complexity dies in ambiguity. I write the PRD, map the stakeholders, and make sure engineering, AI teams, and business read from the same page.",
-    practices: ["PRD writing", "Stakeholder mapping", "RAID logs"],
+      "I translate requirements into clear flows and business logic — the rules a chatbot or voicebot should follow before anyone touches a prompt.",
+    practices: ["Business logic mapping", "Flow design", "Edge-case planning"],
   },
   {
     step: "03",
-    title: "Design",
+    title: "Refine Prompts",
     description:
-      "Workflows before code. I design the user journey, the system flow, and the operating model in Figma so teams execute against a visible blueprint.",
-    practices: ["Figma user flows", "Workflow design", "Solution architecture"],
+      "I work on pre-built AI systems and improve them — writing and refining prompts so the AI follows the business logic and handles real user journeys.",
+    practices: ["Prompt writing", "Prompt refinement", "AI-assisted iteration"],
   },
   {
     step: "04",
-    title: "Execute",
+    title: "Test End-to-End",
     description:
-      "I run delivery across Agile PODs — grooming story points, removing blockers, and keeping sprint velocity honest from kickoff to release.",
-    practices: ["3-POD Agile delivery", "Sprint grooming", "Release management"],
+      "I manually test chatbot and voicebot flows end to end — checking conversation accuracy, edge cases, missing information, flow breaks, and business-logic failures.",
+    practices: ["Manual E2E testing", "Conversational flow testing", "Edge-case testing"],
   },
   {
     step: "05",
-    title: "Measure",
+    title: "Audit & Measure",
     description:
-      "If it isn't measured, it didn't happen. I build the dashboards and LLM evaluation pipelines that tell us whether the AI actually works.",
-    practices: ["Power BI dashboards", "LLM eval pipelines", "Conversational analytics"],
+      "I use free LLM APIs to audit conversations — surfacing missing info, incorrect responses, and broken flows so the next iteration is better.",
+    practices: ["LLM conversation audits", "Data-extraction checks", "Iterative feedback"],
   },
   {
     step: "06",
-    title: "Scale",
+    title: "Make It Repeatable",
     description:
-      "Lessons become systems. I turn what worked into repeatable processes, QA automation, and operating playbooks the team keeps using after launch.",
-    practices: ["QA automation", "Process playbooks", "Retro-driven iteration"],
+      "Scale, for me, means repeatability — turning repeated manual tasks into automation, refining workflows, and making processes easier for the team to use consistently.",
+    practices: ["Manual-task automation", "Reusable logic patterns", "Workflow documentation"],
   },
 ];
 
@@ -83,18 +86,22 @@ export interface FlowStep {
   detail: string;
 }
 
+export type DiagramKind = "automation" | "audit" | "chat" | "flow";
+
 export interface Initiative {
   slug: string;
   title: string;
   tagline: string;
+  category: string;
   org: string;
   period: string;
+  diagram: DiagramKind;
   tags: string[];
   challenge: string;
   businessContext: string;
-  stakeholders: string[];
+  role: string[];
   objectives: string[];
-  executionStrategy: string;
+  approach: string;
   workflow: FlowStep[];
   tools: string[];
   implementation: string;
@@ -104,189 +111,201 @@ export interface Initiative {
 
 export const initiatives: Initiative[] = [
   {
-    slug: "pre-inspection-chatbot",
-    title: "Pre-Inspection Chatbot & Analytics Dashboard",
-    tagline: "Conversational AI that qualifies sellers before inspection — with the analytics layer to prove it works.",
+    slug: "ace-challan-automation",
+    title: "ACE — Challan Automation Panel",
+    tagline:
+      "An AI-assisted browser automation panel that reduces manual traffic-challan lookup effort across multiple government websites.",
+    category: "Automation Project",
     org: "CARS24",
     period: "2025",
-    tags: ["Conversational AI", "Analytics", "Program Delivery"],
+    diagram: "automation",
+    tags: ["Playwright", "Claude-Assisted Build", "Full-Cycle"],
     challenge:
-      "Car sellers arrived at physical inspections unprepared, causing wasted slots, drop-offs, and operational cost. The business needed a way to qualify and prep sellers before the appointment — without adding human workload.",
+      "Looking up traffic challans meant manually visiting several government websites, entering vehicle details on each, and copying results by hand — slow, repetitive, and easy to get wrong.",
     businessContext:
-      "Inspection capacity is a hard operational constraint. Every no-show or unprepared seller burns a slot that a ready seller could have used. Reducing drop-off directly improves funnel conversion.",
-    stakeholders: [
-      "Business operations leadership",
-      "Engineering POD (backend + frontend)",
-      "AI/prompt engineering team",
-      "Inspection field operations",
-      "Analytics & data team",
+      "Challan data sits behind multiple government portals, each with its own form and required fields. Automating the lookup turns a tedious manual chore into a structured, repeatable flow.",
+    role: [
+      "Designed and developed the complete workflow end to end",
+      "Built the frontend admin panel",
+      "Built the backend and API integration",
+      "Wrote the Playwright browser automation",
+      "Handled testing, iteration, and debugging",
     ],
     objectives: [
-      "Ship a production chatbot that preps sellers pre-inspection",
-      "Build the conversational analytics dashboard to measure containment and drop-off",
-      "Keep human escalation paths clean for edge cases",
+      "Take a vehicle registration number (plus chassis/engine number where required)",
+      "Visit each government challan website and enter the right details",
+      "Scrape challan information and return it to the admin panel via API",
     ],
-    executionStrategy:
-      "Ran the initiative as a cross-functional program: PRD and user flows first, then sprint-based delivery across the engineering POD while the prompt lifecycle (write → test → iterate → ship) ran in parallel. Weekly stakeholder reviews kept business, AI, and engineering aligned on one definition of done.",
+    approach:
+      "I built this end to end with Claude assistance — using AI to generate and debug automation logic while I designed the flow, integrated the pieces, and tested each website's quirks until the scraping was reliable.",
     workflow: [
-      { label: "Seller enters funnel", detail: "Booking confirmed → chatbot engages" },
-      { label: "Conversational prep", detail: "Documents, expectations, logistics" },
-      { label: "Edge-case detection", detail: "Intent classification routes exceptions" },
-      { label: "Human escalation", detail: "Ops team receives qualified handoffs" },
-      { label: "Analytics capture", detail: "Every conversation scored and dashboarded" },
+      { label: "Input vehicle number", detail: "Registration no. entered in the admin panel" },
+      { label: "Add chassis / engine", detail: "Supplied where a portal requires it" },
+      { label: "Visit gov websites", detail: "Playwright navigates each portal" },
+      { label: "Enter details & scrape", detail: "Fills forms, reads back challan data" },
+      { label: "Return via API", detail: "Scraped data sent back to the admin panel" },
     ],
-    tools: ["OpenAI API", "Prompt engineering", "Power BI", "SQL", "Jira", "Figma"],
+    tools: ["Playwright", "Claude", "Frontend", "Backend", "APIs", "Browser Automation"],
     implementation:
-      "Owned the full prompt lifecycle for the bot — writing, E2E testing, iterating against real conversation logs, and shipping. Coordinated the engineering POD on integration sprints and built the dashboard that tracked containment rate, drop-off, and sentiment.",
+      "A full-cycle AI-assisted build: I owned the frontend, backend, Playwright automation, and API integration myself, using Claude to accelerate the code and work through the edge cases of each government site.",
     impact: [
-      "Production chatbot live in the seller funnel",
-      "Conversational analytics dashboard adopted by ops leadership",
-      "Edge-case escalation flow reduced unqualified inspection visits",
+      "Reduced repetitive manual challan-lookup effort",
+      "Created a structured way to fetch challan data from multiple websites",
+      "Made a previously manual, error-prone task consistent and repeatable",
     ],
     learnings: [
-      "Prompt quality is a program deliverable — it needs the same review rigor as code",
-      "Dashboards drive adoption: stakeholders trust what they can see",
-      "Escalation design matters more than containment rate chasing",
+      "AI assistance makes a single person genuinely full-cycle — I shipped FE, BE, and automation together",
+      "Government sites are inconsistent; reliable scraping is mostly edge-case handling",
+      "Designing the flow first made the automation far easier to debug",
     ],
   },
   {
     slug: "conversation-audit-automation",
     title: "Conversation Audit Automation",
-    tagline: "An LLM evaluation pipeline that audits AI conversations at scale — replacing manual spot checks.",
+    tagline:
+      "A workflow using free LLM API keys to evaluate human–AI conversations and extract complete, accurate information from chats.",
+    category: "AI Workflow Project",
     org: "CARS24",
     period: "2025",
-    tags: ["LLM Evaluation", "QA Automation", "AI Operations"],
+    diagram: "audit",
+    tags: ["LLM Evaluation", "Data Extraction", "Manual-Effort Reduction"],
     challenge:
-      "Quality assurance for AI conversations relied on humans manually reading transcripts — slow, inconsistent, and impossible to scale as conversation volume grew.",
+      "Reviewing AI conversations by hand to check whether the right information was captured was slow, and it was easy to miss incomplete or broken chats.",
     businessContext:
-      "Voicebots and chatbots in production generate thousands of conversations. Without systematic audit, prompt regressions and failure patterns go unnoticed until customers complain.",
-    stakeholders: [
-      "AI/prompt engineering team",
-      "QA team",
-      "Business operations",
-      "Engineering POD",
+      "Every chatbot and voicebot conversation should capture complete, accurate user information. Without a systematic check, missing details and broken flows slip through unnoticed.",
+    role: [
+      "Designed the logic for auditing conversations",
+      "Set up evaluation using free LLM API keys",
+      "Defined what 'complete and accurate' extraction looks like",
+      "Reviewed findings and fed them back into prompt improvements",
     ],
     objectives: [
-      "Automate conversation auditing with an LLM evaluation pipeline",
-      "Standardize scoring criteria across intents, sentiment, and resolution",
-      "Surface failure patterns to the prompt team systematically",
+      "Audit human–AI conversations automatically",
+      "Extract complete and accurate information from chats",
+      "Surface gaps so flows and prompts can be improved",
     ],
-    executionStrategy:
-      "Defined audit criteria with QA and business stakeholders first, then ran iterative pilots: LLM-scored batches compared against human-audited baselines until agreement was trustworthy. Rolled out as a recurring automated pipeline feeding a findings dashboard.",
+    approach:
+      "I used free LLM API keys to evaluate conversations at low cost — analyzing each chat for missing information, incorrect responses, broken flows, and business-logic misses, then using those findings to improve prompts.",
     workflow: [
-      { label: "Conversation ingestion", detail: "Production transcripts batched" },
-      { label: "LLM evaluation", detail: "Scored on intent, sentiment, resolution" },
-      { label: "Baseline comparison", detail: "Calibrated against human audits" },
-      { label: "Findings dashboard", detail: "Failure patterns surfaced to prompt team" },
-      { label: "Prompt iteration", detail: "Fixes ship back into production" },
+      { label: "Collect conversations", detail: "Human–AI chats gathered for review" },
+      { label: "LLM evaluation", detail: "Free LLM API checks each conversation" },
+      { label: "Flag the gaps", detail: "Missing info, wrong responses, broken flows" },
+      { label: "Check extraction", detail: "Is the captured user data complete & accurate?" },
+      { label: "Feed back", detail: "Findings drive the next prompt iteration" },
     ],
-    tools: ["LLM evaluation", "Sentiment & intent analysis", "Python", "SQL", "Power BI"],
+    tools: ["Free LLM APIs", "Conversation Analysis", "Prompt Refinement", "Business Logic"],
     implementation:
-      "Coordinated calibration cycles between the AI team and QA, owned the scoring rubric, and managed the rollout from pilot to recurring pipeline. Built the reporting layer that turned raw evaluations into prioritized prompt fixes.",
+      "An AI-assisted conversation audit workflow: LLM-powered evaluation that reads conversations and reports on missing information, response quality, and data-extraction completeness — reducing the manual review effort.",
     impact: [
-      "Manual transcript review replaced by systematic LLM auditing",
-      "Consistent scoring rubric adopted across conversation QA",
-      "Prompt regressions caught and fixed before customer impact",
+      "Reduced manual conversation-review effort",
+      "Improved visibility into incomplete or broken conversations",
+      "Helped catch business-logic misses and missing user details earlier",
     ],
     learnings: [
-      "LLM evaluators need calibration against human baselines before anyone trusts them",
-      "A rubric everyone agreed on mattered more than the model used",
-      "Audit findings only create value when routed into the iteration loop",
+      "Free LLM API keys are enough to build a genuinely useful evaluation workflow",
+      "A clear definition of 'complete extraction' matters more than the model used",
+      "Audit findings only help when they loop back into prompt changes",
     ],
   },
   {
-    slug: "voicebot-prompt-lifecycle",
-    title: "Voicebot Prompt Lifecycle Program",
-    tagline: "End-to-end ownership of production voicebot prompts — from requirement to live, with E2E testing in between.",
+    slug: "prompt-flow-testing",
+    title: "Chatbot & Voicebot Prompt Flow Testing",
+    tagline:
+      "Manual end-to-end testing of chatbot and voicebot flows to validate prompts, user journeys, business logic, and conversation quality.",
+    category: "Prompt & Conversation Testing",
     org: "CARS24",
     period: "2025",
-    tags: ["Voice AI", "Prompt Engineering", "E2E Testing"],
+    diagram: "chat",
+    tags: ["Manual E2E Testing", "Prompt Refinement", "Conversational AI"],
     challenge:
-      "Production voicebots needed continuous prompt improvements, but changes shipped without systematic testing risked breaking live customer conversations.",
+      "Production chatbots and voicebots needed continuous improvement, but prompt changes shipped without careful end-to-end testing risk breaking real user conversations.",
     businessContext:
-      "Voicebots handle real customer calls. A bad prompt change degrades every conversation immediately — the cost of an untested change is measured in customer experience.",
-    stakeholders: [
-      "AI engineering team",
-      "Business stakeholders defining call outcomes",
-      "QA automation",
-      "Customer operations",
+      "Chatbots and voicebots handle real users. A weak prompt or an unhandled edge case shows up immediately in the conversation — so flows need to be tested by hand before they're trusted.",
+    role: [
+      "Manually tested chatbot and voicebot flows end to end",
+      "Checked prompt behavior, conversation accuracy, and voicebot responses",
+      "Found edge cases, missing information, flow breaks, and business-logic failures",
+      "Gave feedback and refined prompts through repeated iteration",
     ],
     objectives: [
-      "Own the prompt lifecycle end-to-end: write, test, iterate, ship",
-      "Stand up E2E testing so no prompt reaches production unverified",
-      "Tie prompt iterations to measurable conversation outcomes",
+      "Validate prompts, user journeys, and business logic across full flows",
+      "Catch incorrect AI responses and broken flows before users do",
+      "Improve conversational accuracy through iterative testing and feedback",
     ],
-    executionStrategy:
-      "Treated prompts as releases: each change moved through requirement → draft → Playwright-backed E2E test runs → staged rollout → production monitoring. Iterations were driven by audit findings and conversation analytics, not intuition.",
+    approach:
+      "I walked every flow as a real user would — testing prompt behavior, chatbot logic, voicebot responses, and edge cases — then used AI to improve the prompts through repeated testing, feedback, and iteration.",
     workflow: [
-      { label: "Requirement", detail: "Business defines the call outcome" },
-      { label: "Prompt draft", detail: "Written against real failure cases" },
-      { label: "E2E testing", detail: "Playwright-automated conversation runs" },
-      { label: "Staged rollout", detail: "Verified before full production" },
-      { label: "Monitoring", detail: "Analytics feed the next iteration" },
+      { label: "Walk the flow", detail: "Test the journey end to end as a real user" },
+      { label: "Probe edge cases", detail: "Missing info, wrong responses, flow breaks" },
+      { label: "Log the issues", detail: "Conversation accuracy & business-logic gaps" },
+      { label: "Refine the prompt", detail: "AI-assisted rewrite to fix the behavior" },
+      { label: "Re-test", detail: "Iterate until the flow holds up" },
     ],
-    tools: ["Prompt engineering", "Playwright", "OpenAI API", "QA automation", "Jira"],
+    tools: ["Manual E2E Testing", "Prompt Engineering", "Claude", "Conversation Analysis"],
     implementation:
-      "Wrote and iterated production prompts directly, built the E2E testing discipline around them, and ran the release cadence. Coordinated between business stakeholders defining outcomes and the AI team shipping changes.",
+      "Hands-on conversational testing: I tested prompt behavior, chatbot logic, voicebot responses, user journeys, and edge cases, then improved prompts through repeated AI-assisted iteration.",
     impact: [
-      "Production voicebot prompts shipped through a tested release process",
-      "E2E automation caught regressions before customers heard them",
-      "Prompt iteration cycle tied to conversation analytics",
+      "Improved conversational accuracy",
+      "Reduced flow failures and broken conversations",
+      "Helped make AI interactions more reliable and aligned with user journeys",
     ],
     learnings: [
-      "Prompts deserve release engineering — versioning, testing, staged rollout",
-      "E2E tests for conversations are possible and worth the setup cost",
-      "The requirement conversation with business is where most failures start",
+      "Testing a conversation by hand catches what automated checks miss",
+      "Edge cases — missing info, odd phrasing — are where most flows break",
+      "Tight test → feedback → refine loops improve prompts fast",
     ],
   },
   {
-    slug: "traffic-challan-bot",
-    title: "Traffic Challan Bot",
-    tagline: "A conversational assistant that helps users check and resolve traffic challans — designed, flowed, and delivered.",
+    slug: "manual-workflow-automation",
+    title: "Manual Workflow Automation",
+    tagline:
+      "Identifying repeated daily manual tasks and converting them into AI-assisted or automation-supported workflows.",
+    category: "Automation Project",
     org: "CARS24",
     period: "2025",
-    tags: ["Conversational AI", "Product Design", "Workflow Design"],
+    diagram: "flow",
+    tags: ["Workflow Automation", "AI-Assisted", "Manual-Effort Reduction"],
     challenge:
-      "Vehicle owners struggle to discover and resolve pending traffic challans — a fragmented, confusing process spread across portals. The business saw an opportunity for a conversational entry point.",
+      "Day-to-day execution included repeated manual tasks that ate time and added little value — exactly the kind of work that can be automated.",
     businessContext:
-      "Challan resolution is a natural extension of a car-ownership platform. A conversational interface lowers the barrier for users who would never navigate government portals.",
-    stakeholders: [
-      "Product leadership",
-      "Engineering POD",
-      "AI/prompt team",
-      "External data integrations",
+      "Repetitive manual checks slow teams down. Spotting them and converting them into simple automated or AI-assisted flows frees people up for higher-value work.",
+    role: [
+      "Mapped repetitive daily tasks",
+      "Designed simpler flows to replace them",
+      "Used AI tools to build the automation logic",
+      "Tested outputs and iterated",
     ],
     objectives: [
-      "Design the conversational flow for challan discovery and resolution",
-      "Coordinate delivery across engineering and AI teams",
-      "Ship a working bot with clean escalation paths",
+      "Find the repeated manual tasks worth automating",
+      "Design clear, simpler flows for them",
+      "Use AI tools to build and test the automation",
     ],
-    executionStrategy:
-      "Started from user-journey mapping in Figma: every path a user takes from 'do I have a challan?' to resolution. Converted the journey into conversation flows and PRD requirements, then ran sprint delivery with the POD.",
+    approach:
+      "I looked for the tasks people did over and over, mapped them into simpler flows, used AI tools to generate the automation logic, and tested the outputs until they were dependable.",
     workflow: [
-      { label: "User query", detail: "Vehicle number captured conversationally" },
-      { label: "Challan lookup", detail: "Integration fetches pending challans" },
-      { label: "Explanation", detail: "Bot translates legalese into plain language" },
-      { label: "Resolution path", detail: "Payment guidance or dispute routing" },
-      { label: "Follow-up", detail: "Status tracking and confirmation" },
+      { label: "Spot the repetition", detail: "Identify repeated daily manual tasks" },
+      { label: "Map a simpler flow", detail: "Redesign the task as a clean flow" },
+      { label: "Build with AI", detail: "Use AI tools to generate automation logic" },
+      { label: "Test the output", detail: "Validate and iterate until reliable" },
+      { label: "Hand it over", detail: "Make it easy for the team to reuse" },
     ],
-    tools: ["Figma", "Prompt engineering", "PRD writing", "Jira", "Agile delivery"],
+    tools: ["AI Tools", "Workflow Design", "Automation Logic", "Testing"],
     implementation:
-      "Owned the user flows and PRD, wrote the conversational prompts, and coordinated the engineering integration work through sprint delivery to launch.",
+      "Practical manual-effort reduction: I turned repeated tasks into AI-assisted workflows, building the logic with AI tools and testing each output before handing it to the team.",
     impact: [
-      "Working challan bot delivered with full conversational flow",
-      "User journey from query to resolution mapped and shipped",
-      "Reusable conversation-design patterns established for future bots",
+      "Reduced manual effort on repetitive tasks",
+      "Improved day-to-day execution speed",
+      "Made repeated work easier to run consistently",
     ],
     learnings: [
-      "Conversational UX is product design — the flow diagram is the spec",
-      "External integrations drive the timeline; sequence them first",
-      "Plain-language translation is where conversational AI earns trust",
+      "The best automation targets are the boring tasks people repeat daily",
+      "AI tools make building small automations fast and accessible",
+      "An automation only sticks if the team can run it without me",
     ],
   },
 ];
 
-// ── Skills & Expertise ───────────────────────────────────────────────────────
+// ── Skills & Expertise (user's exact 6 categories) ──────────────────────────
 export interface SkillCluster {
   title: string;
   summary: string;
@@ -296,70 +315,82 @@ export interface SkillCluster {
 
 export const skillClusters: SkillCluster[] = [
   {
-    title: "AI Strategy & Operations",
-    summary: "Turning AI possibilities into shipped, measured products.",
+    title: "AI & Prompting",
+    summary: "Writing, testing, and refining prompts so AI follows real business logic.",
     capabilities: [
-      "Prompt lifecycle ownership (write → test → iterate → ship)",
-      "LLM evaluation & audit pipeline design",
-      "Conversational AI solutioning for voice and chat",
-      "Sentiment & intent analytics",
+      "Prompt writing",
+      "Prompt testing",
+      "Prompt refinement",
+      "LLM evaluation",
+      "Conversation analysis",
+      "Business logic mapping",
     ],
-    tools: ["OpenAI API", "Claude", "LLM evals", "Prompt engineering"],
+    tools: ["Claude", "ChatGPT", "LLM APIs"],
   },
   {
-    title: "Program Management",
-    summary: "Running cross-functional delivery without dropping threads.",
+    title: "Conversational AI",
+    summary: "Testing chatbot and voicebot behavior end to end against real user journeys.",
     capabilities: [
-      "3-POD Agile delivery for 12-engineer teams",
-      "Sprint grooming, story pointing, velocity management",
-      "RAID logs and risk mitigation",
-      "Release management from kickoff to launch",
+      "Chatbot flow testing",
+      "Voicebot flow testing",
+      "User journey validation",
+      "E2E flow testing",
+      "Edge case testing",
+      "Response quality evaluation",
     ],
-    tools: ["Jira", "Trello", "Agile/Scrum", "RAID logs"],
+    tools: ["Manual E2E Testing", "Conversation Analysis"],
   },
   {
-    title: "Workflow & Product Design",
-    summary: "Designing the blueprint teams execute against.",
+    title: "Program & Execution",
+    summary: "Turning requirements into clear flows and keeping teams coordinated.",
     capabilities: [
-      "PRD writing and requirement definition",
-      "User journey and conversation-flow design",
-      "Process and operating-model design",
-      "Prototype and solution-architecture thinking",
+      "Requirement understanding",
+      "Cross-functional coordination",
+      "Workflow planning",
+      "Stakeholder communication",
+      "Task tracking",
+      "Feedback management",
     ],
-    tools: ["Figma", "PRDs", "User flows", "Journey maps"],
+    tools: ["Jira", "Agile", "Stakeholder Comms"],
   },
   {
-    title: "Stakeholder Leadership",
-    summary: "Keeping business, engineering, and AI teams on one page.",
+    title: "Workflow Automation",
+    summary: "Converting repeated manual work into automation-supported flows.",
     capabilities: [
-      "Cross-functional stakeholder alignment",
-      "Executive communication and program reporting",
-      "Conflict resolution and team alignment",
-      "Vendor management",
+      "Manual task automation",
+      "Playwright automation",
+      "Browser automation",
+      "API-based workflows",
+      "Admin panel workflows",
+      "Data extraction workflows",
     ],
-    tools: ["Stakeholder maps", "Program reviews", "Escalation design"],
+    tools: ["Playwright", "APIs", "Admin Panels"],
   },
   {
-    title: "Data & Measurement",
-    summary: "Building the instruments that prove what works.",
+    title: "AI Tools",
+    summary: "Using AI tools to prototype, build, and improve practical solutions.",
     capabilities: [
-      "Analytics dashboard design and delivery",
-      "SQL analysis and data storytelling",
-      "Conversational analytics and containment metrics",
-      "OKR and success-metric definition",
+      "Claude",
+      "ChatGPT",
+      "Free LLM APIs",
+      "Prompt engineering tools",
+      "AI-assisted prototyping",
     ],
-    tools: ["Power BI", "SQL", "Python", "R", "Excel"],
+    tools: ["Claude", "ChatGPT", "LLM APIs"],
   },
   {
-    title: "Execution Excellence",
-    summary: "Quality discipline that scales beyond any one launch.",
+    title: "Technical Understanding",
+    summary: "Enough hands-on technical depth to build, test, and debug real workflows.",
     capabilities: [
-      "E2E testing strategy for AI conversations",
-      "QA automation rollout",
-      "Process optimization and playbook creation",
-      "Retro-driven continuous improvement",
+      "Frontend basics",
+      "Backend basics",
+      "APIs",
+      "Admin panels",
+      "Browser automation",
+      "Data scraping",
+      "Testing and debugging",
     ],
-    tools: ["Playwright", "QA automation", "E2E testing", "Process playbooks"],
+    tools: ["Frontend", "Backend", "APIs"],
   },
 ];
 
@@ -381,23 +412,23 @@ export const experience: ExperienceEntry[] = [
     role: "Program Management Intern",
     period: "Jan 2025 — Present",
     mission:
-      "Drive AI product delivery across conversational AI initiatives — voicebots, chatbots, and the evaluation infrastructure behind them.",
+      "Work across AI workflows, business logic, technical teams, and execution — improving chatbot and voicebot flows, refining prompts, auditing conversations, and automating repetitive work.",
     scope: [
-      "3-POD Agile delivery for a 12-engineer team",
-      "Full prompt lifecycle for production voicebots and chatbots",
-      "LLM evaluation and conversation-audit pipelines",
-      "Conversational analytics dashboards",
-      "PRDs, Figma flows, RAID logs, release management",
+      "Manual end-to-end testing of chatbot & voicebot flows",
+      "Prompt writing, testing, and iterative refinement",
+      "LLM-powered conversation audits using free API keys",
+      "Browser automation (ACE Challan Panel) with Playwright + Claude",
+      "Cross-functional coordination and requirement-to-flow mapping",
     ],
     approach:
-      "Run delivery as a system: clear PRDs upfront, sprint discipline in the middle, dashboards and audits at the end. Keep business and engineering aligned through weekly reviews and visible artifacts.",
+      "Understand the requirement, map it into clear business logic and flows, refine prompts, test conversations end to end, audit the results with LLMs, and turn repeated manual work into automation.",
     results: [
-      "Shipped pre-inspection chatbot with analytics dashboard",
-      "Replaced manual conversation QA with LLM audit automation",
-      "Established E2E-tested prompt release process for voicebots",
-      "Delivered traffic challan bot from journey map to launch",
+      "Built ACE — an AI-assisted Challan Automation Panel — end to end",
+      "Set up an LLM conversation-audit workflow that reduced manual review",
+      "Improved chatbot & voicebot accuracy through iterative prompt testing",
+      "Converted repeated manual tasks into AI-assisted workflows",
     ],
-    skills: ["AI program delivery", "Prompt engineering", "Agile/Scrum", "Stakeholder management"],
+    skills: ["AI workflow testing", "Prompt refinement", "Playwright", "Cross-functional execution"],
   },
   {
     org: "99acres (Info Edge India)",
@@ -416,25 +447,17 @@ export const experience: ExperienceEntry[] = [
       "Structured classification standards for listing data",
       "Improved consistency of categorized content",
     ],
-    skills: ["Information architecture", "Data classification", "Attention to structure"],
+    skills: ["Information architecture", "Data classification", "Structure & consistency"],
   },
   {
     org: "Codtech IT Solutions",
     role: "Power BI & SQL Intern",
     period: "May 2024",
     mission:
-      "Build the data-analysis foundation: SQL querying and Power BI dashboarding on real business datasets.",
-    scope: [
-      "SQL query development",
-      "Power BI dashboard construction",
-      "Business data analysis",
-    ],
-    approach:
-      "Learn by shipping: every analysis ended in a dashboard a stakeholder could actually read.",
-    results: [
-      "Delivered working Power BI dashboards",
-      "Built SQL fluency that now powers analytics work at CARS24",
-    ],
+      "Build a data-analysis foundation: SQL querying and Power BI dashboarding on real business datasets.",
+    scope: ["SQL query development", "Power BI dashboard construction", "Business data analysis"],
+    approach: "Learn by shipping: every analysis ended in a dashboard a stakeholder could read.",
+    results: ["Delivered working Power BI dashboards", "Built SQL fluency used in later analytics work"],
     skills: ["SQL", "Power BI", "Data visualization"],
   },
   {
@@ -444,8 +467,7 @@ export const experience: ExperienceEntry[] = [
     mission:
       "Conduct structured academic research during MBA — hypothesis design, data collection, and defensible conclusions.",
     scope: ["Research methodology", "Data collection & analysis", "Academic writing"],
-    approach:
-      "Rigor first: a conclusion is only as good as the method behind it.",
+    approach: "Rigor first: a conclusion is only as good as the method behind it.",
     results: ["Completed structured research with documented methodology"],
     skills: ["Research methods", "Analytical writing", "Critical thinking"],
   },
@@ -466,120 +488,114 @@ export interface GalleryArtifact {
 
 export const galleryArtifacts: GalleryArtifact[] = [
   {
-    title: "Prompt Release Pipeline",
-    type: "Execution Framework",
-    description: "How a prompt change moves from business requirement to production — with E2E testing as the gate.",
-    nodes: ["Requirement", "Draft", "E2E Test", "Staged Rollout", "Production", "Monitor"],
+    title: "Prompt Test & Refine Loop",
+    type: "Testing Workflow",
+    description: "How I improve a prompt: walk the flow, find the break, refine with AI, re-test.",
+    nodes: ["Walk Flow", "Find Break", "Refine Prompt", "Re-test", "Confirm"],
   },
   {
-    title: "Conversation Audit Loop",
-    type: "AI Operations Model",
-    description: "The closed loop that keeps production AI honest: evaluate, surface, fix, re-ship.",
-    nodes: ["Ingest", "LLM Evaluate", "Calibrate", "Dashboard", "Prompt Fix", "Re-deploy"],
+    title: "Conversation Audit Workflow",
+    type: "AI Workflow",
+    description: "Free LLM keys evaluate chats and surface missing info and broken flows.",
+    nodes: ["Collect", "LLM Evaluate", "Flag Gaps", "Check Extraction", "Feed Back"],
   },
   {
-    title: "3-POD Coordination Model",
-    type: "Operating Structure",
-    description: "How three Agile PODs stay aligned on one roadmap without stepping on each other.",
-    nodes: ["Roadmap", "POD 1", "POD 2", "POD 3", "Weekly Sync", "Release Train"],
+    title: "ACE Automation Path",
+    type: "Automation Project",
+    description: "Vehicle number in, challan data out — across multiple government sites.",
+    nodes: ["Reg No.", "Gov Sites", "Fill & Scrape", "API", "Admin Panel"],
   },
   {
-    title: "Escalation Decision Tree",
-    type: "Decision Model",
-    description: "When the bot hands off to a human — designed so edge cases reach ops qualified, not raw.",
-    nodes: ["Intent Check", "Confidence Gate", "Self-serve", "Qualify Context", "Human Handoff"],
+    title: "Manual → Automated Flow",
+    type: "Automation Workflow",
+    description: "Spot a repeated task, map a simpler flow, build it with AI, hand it over.",
+    nodes: ["Spot Task", "Map Flow", "Build with AI", "Test", "Reuse"],
   },
 ];
 
-// ── Impact Dashboard ─────────────────────────────────────────────────────────
+// ── By the Numbers (honest stats) ────────────────────────────────────────────
 export const dashboardStats = [
-  { value: 4, suffix: "", label: "AI Initiatives Delivered", detail: "Chatbots, voicebots, eval pipelines" },
-  { value: 3, suffix: "", label: "Agile PODs Coordinated", detail: "Parallel sprint delivery" },
-  { value: 12, suffix: "", label: "Engineers Aligned", detail: "Cross-functional team" },
-  { value: 2, suffix: "", label: "AI Products in Production", detail: "Live customer-facing systems" },
-  { value: 5, suffix: "+", label: "Workflows Designed", detail: "Figma flows → shipped systems" },
-  { value: 100, suffix: "%", label: "Prompt Releases E2E-Tested", detail: "No untested change ships" },
+  { value: 4, suffix: "", label: "Initiatives Contributed To", detail: "Automation, audits, testing, flows" },
+  { value: 2, suffix: "", label: "Conversational Products Supported", detail: "Chatbot & voicebot flows" },
+  { value: 100, suffix: "%", label: "Flows Tested End-to-End", detail: "Manual, edge cases included" },
+  { value: 1, suffix: "", label: "Full-Cycle Build (ACE)", detail: "FE + BE + automation + API" },
+  { value: 5, suffix: "+", label: "Workflows Designed", detail: "Mapped and made repeatable" },
+  { value: 3, suffix: "", label: "AI Tools Used Daily", detail: "Claude, ChatGPT, free LLM APIs" },
 ];
 
-// ── Resume center ────────────────────────────────────────────────────────────
+// ── Resume center (user's exact summary + strengths) ─────────────────────────
+export const executiveSummary =
+  "Early-career AI & Technology Program Manager with hands-on experience in chatbot and voicebot flow testing, prompt refinement, conversation audits, workflow automation, and AI-assisted product development. Skilled at converting business requirements into clear flows, coordinating with technical teams, testing AI behavior end to end, and using AI tools to reduce manual effort.";
+
+export const coreStrengths = [
+  "AI workflow understanding",
+  "Prompt flow testing",
+  "Conversational AI evaluation",
+  "Manual E2E testing",
+  "Business logic mapping",
+  "Workflow automation",
+  "Cross-functional coordination",
+  "AI-assisted prototyping",
+  "Playwright browser automation",
+  "LLM-based conversation audits",
+];
+
 export const resumeHighlights = [
-  "Owns the full prompt lifecycle for production voicebots and chatbots — writing, E2E testing, iterating, shipping",
-  "Runs 3-POD Agile delivery for 12-engineer teams: grooming, story points, RAID logs, releases",
-  "Built LLM evaluation pipelines that replaced manual conversation QA",
-  "Designs workflows and PRDs that keep business, engineering, and AI teams aligned",
-  "MBA + hands-on analytics foundation (SQL, Power BI, Python)",
-];
-
-export const competencies = [
-  "AI Program Delivery", "Prompt Engineering", "LLM Evaluation", "Agile / Scrum",
-  "PRD Writing", "Workflow Design", "Stakeholder Management", "RAID Logs",
-  "Power BI", "SQL", "Figma", "Playwright", "Jira", "Release Management",
+  "Built ACE — an AI-assisted Challan Automation Panel — end to end (frontend, backend, Playwright, API) with Claude assistance",
+  "Set up an LLM-powered conversation-audit workflow on free API keys to reduce manual review",
+  "Manually tested chatbot & voicebot flows end to end, refining prompts through iteration",
+  "Converted repeated manual tasks into AI-assisted automation workflows",
+  "MBA plus a hands-on analytics foundation (SQL, Power BI)",
 ];
 
 // ── Hero ecosystem graph data ────────────────────────────────────────────────
 export interface EcoNode {
   id: string;
-  group: number; // 0 = core, 1 = systems, 2 = people, 3 = process, 4 = outcomes
+  group: number; // 0 core, 1 AI, 2 people, 3 process, 4 outcomes
   size: number;
 }
 
 export const ecosystemGraph = {
   nodes: [
     { id: "Yogesh", group: 0, size: 14 },
-    // AI systems
-    { id: "Voicebots", group: 1, size: 8 },
     { id: "Chatbots", group: 1, size: 8 },
-    { id: "LLM Evals", group: 1, size: 7 },
-    { id: "Prompt Lifecycle", group: 1, size: 7 },
-    // People
-    { id: "Engineering PODs", group: 2, size: 8 },
-    { id: "AI Team", group: 2, size: 7 },
-    { id: "Business Stakeholders", group: 2, size: 7 },
-    { id: "QA", group: 2, size: 6 },
-    { id: "Operations", group: 2, size: 6 },
-    // Process
-    { id: "PRDs", group: 3, size: 6 },
-    { id: "Figma Flows", group: 3, size: 6 },
-    { id: "RAID Logs", group: 3, size: 5 },
-    { id: "Sprints", group: 3, size: 6 },
-    { id: "E2E Testing", group: 3, size: 6 },
-    // Outcomes
-    { id: "Dashboards", group: 4, size: 7 },
-    { id: "Releases", group: 4, size: 7 },
-    { id: "Insights", group: 4, size: 6 },
+    { id: "Voicebots", group: 1, size: 8 },
+    { id: "Prompts", group: 1, size: 7 },
+    { id: "LLM Audits", group: 1, size: 7 },
+    { id: "Business Logic", group: 2, size: 8 },
+    { id: "Tech Teams", group: 2, size: 7 },
+    { id: "Stakeholders", group: 2, size: 7 },
+    { id: "User Journeys", group: 2, size: 6 },
+    { id: "Flow Testing", group: 3, size: 7 },
+    { id: "Edge Cases", group: 3, size: 6 },
+    { id: "Playwright", group: 3, size: 6 },
+    { id: "Requirements", group: 3, size: 6 },
+    { id: "Automation", group: 4, size: 8 },
+    { id: "Less Manual Work", group: 4, size: 7 },
+    { id: "Reliable AI", group: 4, size: 7 },
   ] as EcoNode[],
   links: [
-    // Core orchestrates everything
-    { source: "Yogesh", target: "Voicebots" },
     { source: "Yogesh", target: "Chatbots" },
-    { source: "Yogesh", target: "Engineering PODs" },
-    { source: "Yogesh", target: "Business Stakeholders" },
-    { source: "Yogesh", target: "PRDs" },
-    { source: "Yogesh", target: "Sprints" },
-    { source: "Yogesh", target: "Dashboards" },
-    // Systems
-    { source: "Prompt Lifecycle", target: "Voicebots" },
-    { source: "Prompt Lifecycle", target: "Chatbots" },
-    { source: "LLM Evals", target: "Voicebots" },
-    { source: "LLM Evals", target: "Chatbots" },
-    { source: "LLM Evals", target: "Insights" },
-    // People connections
-    { source: "Engineering PODs", target: "Sprints" },
-    { source: "AI Team", target: "Prompt Lifecycle" },
-    { source: "Business Stakeholders", target: "PRDs" },
-    { source: "QA", target: "E2E Testing" },
-    { source: "Operations", target: "Chatbots" },
-    { source: "Yogesh", target: "AI Team" },
-    { source: "Yogesh", target: "QA" },
-    { source: "Yogesh", target: "Operations" },
-    // Process to outcomes
-    { source: "PRDs", target: "Figma Flows" },
-    { source: "Figma Flows", target: "Sprints" },
-    { source: "Sprints", target: "Releases" },
-    { source: "E2E Testing", target: "Releases" },
-    { source: "RAID Logs", target: "Sprints" },
-    { source: "Yogesh", target: "RAID Logs" },
-    { source: "Dashboards", target: "Insights" },
-    { source: "Releases", target: "Dashboards" },
+    { source: "Yogesh", target: "Voicebots" },
+    { source: "Yogesh", target: "Business Logic" },
+    { source: "Yogesh", target: "Flow Testing" },
+    { source: "Yogesh", target: "Automation" },
+    { source: "Yogesh", target: "Requirements" },
+    { source: "Yogesh", target: "Stakeholders" },
+    { source: "Prompts", target: "Chatbots" },
+    { source: "Prompts", target: "Voicebots" },
+    { source: "LLM Audits", target: "Chatbots" },
+    { source: "LLM Audits", target: "Reliable AI" },
+    { source: "Business Logic", target: "Prompts" },
+    { source: "Flow Testing", target: "Edge Cases" },
+    { source: "Flow Testing", target: "Reliable AI" },
+    { source: "Requirements", target: "Business Logic" },
+    { source: "User Journeys", target: "Flow Testing" },
+    { source: "Tech Teams", target: "Playwright" },
+    { source: "Playwright", target: "Automation" },
+    { source: "Automation", target: "Less Manual Work" },
+    { source: "Yogesh", target: "LLM Audits" },
+    { source: "Yogesh", target: "Tech Teams" },
+    { source: "Reliable AI", target: "User Journeys" },
   ],
 };

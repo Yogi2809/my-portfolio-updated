@@ -1,19 +1,26 @@
-/* ── Design tokens: dark luxury, executive-grade ─────────────────────────── */
+/* ── Design tokens: deep obsidian + dual accent (green primary, magenta hi) ── */
 :root {
-  --bg: #08080d;
-  --surface: #0e0e16;
-  --surface-2: #13131d;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #ededf2;
-  --muted: #8a8a96;
-  --accent: #14b8a6;
-  --accent-soft: #5eead4;
-  --accent-dim: rgba(20, 184, 166, 0.12);
-  --radius: 14px;
-  --radius-lg: 22px;
-  --maxw: 1180px;
-  --nav-h: 64px;
+  --bg: #0f172a;
+  --surface: #131e36;
+  --surface-2: #1a2742;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --text: #ffffff;
+  --muted: #94a3b8;
+  /* Primary accent — Acid Green */
+  --accent: #00ff87;
+  --accent-soft: #7dffc0;
+  --accent-dim: rgba(0, 255, 135, 0.12);
+  /* Highlight accent — Neon Magenta (used sparingly) */
+  --magenta: #ff0055;
+  --magenta-soft: #ff5c8a;
+  --magenta-dim: rgba(255, 0, 85, 0.12);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --maxw: 1200px;
+  --gutter: 24px;
+  --nav-h: 66px;
+  --section-pad: clamp(80px, 10vh, 120px);
   --font: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -44,7 +51,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .section {
-  padding: 110px 0;
+  padding: var(--section-pad) 0;
   position: relative;
 }
 
@@ -118,15 +125,21 @@ button { font-family: inherit; cursor: pointer; }
 }
 .btn--primary {
   background: var(--accent);
-  color: #06231f;
+  color: #042b1a;
+  font-weight: 600;
+  box-shadow: 0 0 0 0 rgba(0, 255, 135, 0.4);
 }
-.btn--primary:hover { background: var(--accent-soft); transform: translateY(-1px); }
+.btn--primary:hover {
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px -8px rgba(0, 255, 135, 0.5);
+}
 .btn--ghost {
   border-color: var(--border-strong);
   color: var(--text);
   background: transparent;
 }
-.btn--ghost:hover { border-color: var(--accent); color: var(--accent-soft); }
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent-soft); transform: translateY(-2px); }
 
 /* ── Reveal animation (GSAP adds .is-visible) ───────────────────────────── */
 .reveal {
@@ -135,6 +148,24 @@ button { font-family: inherit; cursor: pointer; }
   transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 .reveal.is-visible { opacity: 1; transform: none; }
+
+/* When a reveal wraps a card inside a stretch grid, it must fill the row height
+   so sibling cards line up to equal heights. */
+.operate-grid > .reveal,
+.init-grid > .reveal,
+.skills-grid > .reveal,
+.gallery-grid > .reveal,
+.dash-grid > .reveal {
+  height: 100%;
+}
+.operate-grid > .reveal > .panel,
+.init-grid > .reveal > a,
+.gallery-grid > .reveal > .panel,
+.dash-grid > .reveal > .panel {
+  height: 100%;
+}
+.init-grid > .reveal > a { display: block; height: 100%; }
+.init-grid > .reveal > a > .panel { height: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { initiatives } from "../data/content";
 import Reveal from "../components/Reveal";
+import FlowDiagram, { ChatBubbles, Waveform } from "../components/diagrams/FlowDiagrams";
 
 const BackIcon = () => (
   <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
@@ -25,8 +26,9 @@ const InitiativeDetail = () => {
         <div className="dot-grid" />
         <div className="container">
           <Link to="/#initiatives" className="detail-back">
-            <BackIcon /> All Strategic Initiatives
+            <BackIcon /> All Initiatives
           </Link>
+          <div className="init-cat">{init.category}</div>
           <div className="init-org">
             {init.org} · {init.period}
           </div>
@@ -60,10 +62,10 @@ const InitiativeDetail = () => {
         <Reveal>
           <div className="detail-cols">
             <div className="detail-block">
-              <h2>Stakeholders</h2>
+              <h2>My Role</h2>
               <ul className="detail-list">
-                {init.stakeholders.map((s) => (
-                  <li key={s}>{s}</li>
+                {init.role.map((r) => (
+                  <li key={r}>{r}</li>
                 ))}
               </ul>
             </div>
@@ -80,14 +82,24 @@ const InitiativeDetail = () => {
 
         <Reveal>
           <div className="detail-block">
-            <h2>Execution Strategy</h2>
-            <p>{init.executionStrategy}</p>
+            <h2>Approach</h2>
+            <p>{init.approach}</p>
           </div>
         </Reveal>
 
         <Reveal>
           <div className="detail-block">
-            <h2>Workflow Design</h2>
+            <h2>Workflow</h2>
+            {/* Animated diagram appropriate to this initiative */}
+            <div className="panel detail-diagram">
+              <FlowDiagram kind={init.diagram} steps={init.workflow} />
+            </div>
+            {init.diagram === "chat" && (
+              <div className="panel detail-diagram detail-diagram--split">
+                <ChatBubbles />
+                <Waveform />
+              </div>
+            )}
             <div className="flow">
               {init.workflow.map((step, i) => (
                 <div className="flow-step" key={step.label}>

@@ -4,8 +4,8 @@ import * as THREE from "three";
 import SpriteText from "three-spritetext";
 import { ecosystemGraph } from "../data/content";
 
-// Group palette: core teal, systems soft-teal, people white, process muted, outcomes bright
-const GROUP_COLORS = ["#14b8a6", "#5eead4", "#ededf2", "#8a8a96", "#2dd4bf"];
+// Group palette: core magenta, AI green, people white, process soft-green, outcomes green
+const GROUP_COLORS = ["#ff0055", "#00ff87", "#ffffff", "#7dffc0", "#00ff87"];
 
 const EcosystemGraph = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -103,7 +103,7 @@ const EcosystemGraph = () => {
           group.add(halo);
 
           const label = new SpriteText(node.id);
-          label.color = node.group === 0 ? "#5eead4" : "#c9c9d4";
+          label.color = node.group === 0 ? "#ff5c8a" : "#dfe6ee";
           label.textHeight = node.group === 0 ? 6.5 : 4.2;
           label.position.set(0, node.size * 0.45 + 5, 0);
           label.fontFace = "Geist, Arial, sans-serif";
@@ -111,13 +111,13 @@ const EcosystemGraph = () => {
 
           return group;
         }}
-        linkColor={() => "rgba(94, 234, 212, 0.25)"}
+        linkColor={() => "rgba(0, 255, 135, 0.22)"}
         linkWidth={0.6}
         linkOpacity={0.35}
         linkDirectionalParticles={reducedMotion ? 0 : 1}
         linkDirectionalParticleSpeed={0.004}
         linkDirectionalParticleWidth={1.2}
-        linkDirectionalParticleColor={() => "#14b8a6"}
+        linkDirectionalParticleColor={() => "#00ff87"}
       />
     </div>
   );

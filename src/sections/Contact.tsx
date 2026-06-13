@@ -18,16 +18,13 @@ const Contact = () => (
             Email Me
           </a>
           <a className="btn btn--ghost" href={identity.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
+            Connect on LinkedIn
+          </a>
+          <a className="btn btn--ghost" href={identity.resumePdf} target="_blank" rel="noreferrer">
+            View Resume
           </a>
           <a className="btn btn--ghost" href={identity.github} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a className="btn btn--ghost" href={identity.resumePdf} download>
-            Resume
-          </a>
-          <a className="btn btn--ghost" href={identity.calendly} target="_blank" rel="noreferrer">
-            Book a Call
+            View GitHub
           </a>
         </div>
       </Reveal>

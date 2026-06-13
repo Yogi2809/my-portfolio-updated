@@ -24,27 +24,33 @@ const Hero = () => {
       <div className="container hero-grid">
         <div>
           <Reveal>
-            <div className="hero-eyebrow">{identity.role}</div>
+            <div className="hero-eyebrow">AI-Native · Early-Career · Execution-Focused</div>
           </Reveal>
           <Reveal delay={80}>
             <h1>
-              Building Systems That Turn <em>AI Into Business Impact</em>
+              AI &amp; Technology <span className="mag">Program Manager</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <p className="hero-sub">{identity.subheadline}</p>
           </Reveal>
-          <Reveal delay={240}>
+          <Reveal delay={210}>
+            <p className="hero-support">{identity.supporting}</p>
+          </Reveal>
+          <Reveal delay={260}>
             <div className="hero-ctas">
               <button className="btn btn--primary" onClick={() => scrollTo("#initiatives")}>
-                Explore My Work
+                View My Work
               </button>
               <button className="btn btn--ghost" onClick={() => scrollTo("#initiatives")}>
-                View Strategic Initiatives
+                Explore Initiatives
               </button>
               <a className="btn btn--ghost" href={identity.resumePdf} download>
                 Download Resume
               </a>
+              <button className="btn btn--ghost" onClick={() => scrollTo("#contact")}>
+                Contact Me
+              </button>
             </div>
           </Reveal>
           <Reveal delay={320}>

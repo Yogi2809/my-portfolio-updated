@@ -1,4 +1,10 @@
-import { identity, resumeHighlights, competencies, education } from "../data/content";
+import {
+  identity,
+  executiveSummary,
+  resumeHighlights,
+  coreStrengths,
+  education,
+} from "../data/content";
 import Reveal from "../components/Reveal";
 
 const ResumeCenter = () => (
@@ -8,11 +14,19 @@ const ResumeCenter = () => (
         <div className="section-label">Resume</div>
         <h2 className="section-title">Executive Summary</h2>
         <p className="section-sub">
-          AI &amp; Technology Program Manager with an MBA, hands-on prompt
-          engineering depth, and proven cross-functional delivery across
-          production conversational AI systems.
+          A snapshot of where I am today — an early-career AI &amp; Technology
+          Program Manager who can understand business problems and use AI tools
+          to build, test, and improve real workflows.
         </p>
       </Reveal>
+
+      <Reveal>
+        <div className="panel resume-summary">
+          <h4>Executive Summary</h4>
+          <p>{executiveSummary}</p>
+        </div>
+      </Reveal>
+
       <div className="resume-grid">
         <Reveal>
           <div className="panel resume-main">
@@ -39,37 +53,22 @@ const ResumeCenter = () => (
               <a className="btn btn--primary" href={identity.resumePdf} download>
                 Download Resume (PDF)
               </a>
-              <a
-                className="btn btn--ghost"
-                href={identity.resumePdf}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Printable Version
+              <a className="btn btn--ghost" href={identity.resumePdf} target="_blank" rel="noreferrer">
+                View Resume
               </a>
-              <a
-                className="btn btn--ghost"
-                href={identity.linkedin}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn btn--ghost" href={identity.linkedin} target="_blank" rel="noreferrer">
                 LinkedIn
               </a>
-              <a
-                className="btn btn--ghost"
-                href={identity.github}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn btn--ghost" href={identity.github} target="_blank" rel="noreferrer">
                 GitHub
               </a>
             </div>
           </Reveal>
           <Reveal delay={180}>
             <div className="panel resume-comp">
-              <h4>Core Competencies</h4>
+              <h4>Core Strengths</h4>
               <div className="resume-comp-tags">
-                {competencies.map((c) => (
+                {coreStrengths.map((c) => (
                   <span className="chip" key={c}>
                     {c}
                   </span>

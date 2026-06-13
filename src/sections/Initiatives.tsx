@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { initiatives } from "../data/content";
 import Reveal from "../components/Reveal";
+import TiltCard from "../components/TiltCard";
 
 const ArrowIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -12,18 +13,20 @@ const Initiatives = () => (
   <section className="section" id="initiatives">
     <div className="container">
       <Reveal>
-        <div className="section-label">Strategic Initiatives</div>
-        <h2 className="section-title">Executive Case Studies</h2>
+        <div className="section-label">Initiatives</div>
+        <h2 className="section-title">Strategic Initiatives &amp; AI Workflow Projects</h2>
         <p className="section-sub">
-          Not projects — programs. Each initiative is a full cycle of problem
-          framing, stakeholder alignment, workflow design, and measured delivery.
+          The work I've actually done — automation I built end to end, AI
+          workflows I designed, and conversational flows I tested and refined.
+          Open any card for the full story.
         </p>
       </Reveal>
       <div className="init-grid">
         {initiatives.map((init, i) => (
           <Reveal key={init.slug} delay={i * 80}>
             <Link to={`/initiatives/${init.slug}`}>
-              <div className="panel init-card">
+              <TiltCard className="panel init-card" max={6}>
+                <div className="init-cat">{init.category}</div>
                 <div className="init-org">
                   {init.org} · {init.period}
                 </div>
@@ -37,9 +40,9 @@ const Initiatives = () => (
                   ))}
                 </div>
                 <span className="init-open">
-                  Open case study <ArrowIcon />
+                  Open initiative <ArrowIcon />
                 </span>
-              </div>
+              </TiltCard>
             </Link>
           </Reveal>
         ))}

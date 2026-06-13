@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { dashboardStats } from "../data/content";
 import Reveal from "../components/Reveal";
+import TiltCard from "../components/TiltCard";
 
 // Animated counter that counts up when scrolled into view
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
@@ -47,21 +48,21 @@ const Dashboard = () => (
   <section className="section" id="impact">
     <div className="container">
       <Reveal>
-        <div className="section-label">Impact Dashboard</div>
-        <h2 className="section-title">The Leadership Cockpit</h2>
+        <div className="section-label">By the Numbers</div>
+        <h2 className="section-title">Honest Impact, Real Work</h2>
         <p className="section-sub">
-          Real numbers from real programs — every figure below is verifiable
-          against the work behind it.
+          Every figure here maps to work I actually did — no inflated counts,
+          nothing I can't walk you through.
         </p>
       </Reveal>
       <div className="dash-grid">
         {dashboardStats.map((stat, i) => (
           <Reveal key={stat.label} delay={i * 60}>
-            <div className="panel dash-card">
+            <TiltCard className="panel dash-card" max={5}>
               <Counter value={stat.value} suffix={stat.suffix} />
               <b>{stat.label}</b>
               <span>{stat.detail}</span>
-            </div>
+            </TiltCard>
           </Reveal>
         ))}
       </div>
