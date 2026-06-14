@@ -18,13 +18,16 @@ export const identity = {
   resumePdf: "/Yogesh_Mishra_PM_Resume.pdf",
 };
 
-// Honest hero chips — what I actually do, no inflated counts
-export const heroMetrics = [
-  { value: "E2E", label: "Chatbot & Voicebot Flows Tested" },
-  { value: "Prompt", label: "Iterative Refinement" },
-  { value: "LLM", label: "Conversation Audits" },
-  { value: "Playwright", label: "Browser Automation" },
-  { value: "Cross-fn", label: "Execution Coordination" },
+// Hero capability pills — the core things I do, shown as a clean tag cloud
+export const heroCapabilities = [
+  "E2E Program Ownership & Execution",
+  "Prompt Engineering",
+  "LLM Audit Automation",
+  "Playwright Automation",
+  "Agile Methodologies",
+  "Scrum Ceremonies",
+  "Jira",
+  "Cross-Functional Collaboration",
 ];
 
 // ── How I Work With AI, Teams, and Workflows ─────────────────────────────────

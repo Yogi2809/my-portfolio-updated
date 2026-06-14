@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { identity, heroMetrics } from "../data/content";
+import { identity, heroCapabilities } from "../data/content";
 import Reveal from "../components/Reveal";
 
 // Lazy-load the 3D graph so the initial paint is instant
@@ -55,11 +55,10 @@ const Hero = () => {
           </Reveal>
           <Reveal delay={320}>
             <div className="hero-metrics">
-              {heroMetrics.map((m) => (
-                <div className="hero-metric" key={m.label}>
-                  <b>{m.value}</b>
-                  <span>{m.label}</span>
-                </div>
+              {heroCapabilities.map((c) => (
+                <span className="hero-pill" key={c}>
+                  {c}
+                </span>
               ))}
             </div>
           </Reveal>
