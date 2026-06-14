@@ -103,10 +103,14 @@ const EcosystemGraph = () => {
           group.add(halo);
 
           const label = new SpriteText(node.id);
-          label.color = node.group === 0 ? "#ff5c8a" : "#dfe6ee";
+          label.color = node.group === 0 ? "#ff8fb0" : "#ffffff";
           label.textHeight = node.group === 0 ? 6.5 : 4.2;
           label.position.set(0, node.size * 0.45 + 5, 0);
           label.fontFace = "Geist, Arial, sans-serif";
+          // Dark backing pill so labels stay legible over the warp streaks
+          label.backgroundColor = "rgba(8,13,26,0.72)";
+          label.padding = node.group === 0 ? 2.5 : 1.8;
+          label.borderRadius = 3;
           group.add(label);
 
           return group;
