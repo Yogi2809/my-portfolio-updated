@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
-import DnaBackground from "./components/DnaBackground";
+import WarpBackground from "./components/WarpBackground";
 import SiteNav from "./components/SiteNav";
 import HomePage from "./pages/HomePage";
 import InitiativeDetail from "./pages/InitiativeDetail";
@@ -8,7 +8,8 @@ import { identity } from "./data/content";
 
 const App = () => (
   <BrowserRouter>
-    <DnaBackground />
+    <WarpBackground />
+    <div className="scene-veil" aria-hidden="true" />
     <SiteNav />
     <main className="site-main">
       <Routes>

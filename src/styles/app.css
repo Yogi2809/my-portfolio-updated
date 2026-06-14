@@ -650,16 +650,31 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-/* ════ DNA helix background layering ════════════════════════════════════ */
+/* ════ 3D scene background layering ═════════════════════════════════════ */
 /* Fixed canvas sits above the body bg but behind all content. */
-.dna-bg {
+.scene-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.55;
+  opacity: 0.78;
 }
-.dna-bg canvas { display: block; }
+.scene-bg canvas { display: block; }
+/* Darkens the warp where text lives (left → fading right) so headings and
+   body copy stay readable while the effect stays vivid on the open side. */
+.scene-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(15, 23, 42, 0.82) 0%,
+    rgba(15, 23, 42, 0.46) 30%,
+    rgba(15, 23, 42, 0.12) 52%,
+    transparent 72%
+  );
+}
 .site-main { position: relative; z-index: 1; }
 
 .footer {
