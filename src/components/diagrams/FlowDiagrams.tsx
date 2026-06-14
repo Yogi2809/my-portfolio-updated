@@ -27,10 +27,10 @@ const useInView = () => {
 const ChatBubbles = () => {
   const { ref, seen } = useInView();
   const lines = [
-    { who: "user", text: "Do I have any pending challans?" },
-    { who: "bot", text: "Sure — what's your vehicle number?" },
-    { who: "user", text: "MP09 AB 1234" },
-    { who: "bot", text: "Found 2 challans. Want the details?" },
+    { who: "user", text: "I still haven't received my quote." },
+    { who: "bot", text: "Your inspection is done — let me check the latest price." },
+    { who: "user", text: "I'm expecting ₹5.2 lakh for my car." },
+    { who: "bot", text: "Buyers bid up to ₹4.9L earlier. Shall we try the auction at ₹4.75L?" },
   ];
   return (
     <div className="diagram chat-diagram" ref={ref}>
@@ -58,7 +58,7 @@ const Waveform = () => {
           <span key={i} style={{ animationDelay: `${(i % 14) * 0.06}s` }} />
         ))}
       </div>
-      <div className="wave-label">Voicebot response · listening</div>
+      <div className="wave-label">Voicebot · negotiating price in Hinglish</div>
     </div>
   );
 };
