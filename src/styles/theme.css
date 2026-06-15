@@ -159,14 +159,14 @@ button { font-family: inherit; cursor: pointer; }
   height: 100%;
 }
 .operate-grid > .reveal > .panel,
-.init-grid > .reveal > a,
+.init-grid > .reveal > .init-cell,
 .skills-grid > .reveal > .panel,
 .gallery-grid > .reveal > .panel,
 .dash-grid > .reveal > .panel {
   height: 100%;
 }
-.init-grid > .reveal > a { display: block; height: 100%; }
-.init-grid > .reveal > a > .panel { height: 100%; }
+.init-grid > .reveal > .init-cell { display: block; height: 100%; cursor: pointer; }
+.init-grid > .reveal > .init-cell > .panel { height: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

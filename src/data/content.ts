@@ -110,6 +110,7 @@ export interface Initiative {
   implementation: string;
   impact: string[];
   learnings: string[];
+  repos?: { label: string; url: string }[];
 }
 
 export const initiatives: Initiative[] = [
@@ -122,44 +123,46 @@ export const initiatives: Initiative[] = [
     org: "CARS24",
     period: "2025",
     diagram: "automation",
-    tags: ["Playwright", "Claude-Assisted Build", "Full-Cycle"],
+    tags: ["Playwright", "Node.js", "Multi-Scraper"],
     challenge:
-      "Looking up traffic challans meant manually visiting several government websites, entering vehicle details on each, and copying results by hand — slow, repetitive, and easy to get wrong.",
+      "Before buying a used car, Cars24's QC team has to verify outstanding government traffic challans against the vehicle number across 10+ state and national portals — manually entering numbers, solving CAPTCHAs, and recording results. At ~2,000 inspections/day it took 15–20 minutes per vehicle with an 8–12% miss rate from fatigue.",
     businessContext:
-      "Challan data sits behind multiple government portals, each with its own form and required fields. Automating the lookup turns a tedious manual chore into a structured, repeatable flow.",
+      "Undetected challans become Cars24's liability at the point of sale — a single missed fine can cost ₹5,000–₹50,000 in disputes. At 2,000 vehicles a day even a 2% miss rate is real financial exposure, so the check has to be fast, reliable, and complete.",
     role: [
-      "Designed and developed the complete workflow end to end",
-      "Built the frontend admin panel",
-      "Built the backend and API integration",
-      "Wrote the Playwright browser automation",
-      "Handled testing, iteration, and debugging",
+      "Built the Playwright multi-scraper engine for 10+ government challan portals",
+      "Moved scrapers from sequential to parallel execution (9+ min → under 4)",
+      "Designed the job-queue, proxy-routing, and admin-panel submission flow",
+      "Worked through each portal's forms, CAPTCHAs, and layouts; tested and debugged",
     ],
     objectives: [
-      "Take a vehicle registration number (plus chassis/engine number where required)",
-      "Visit each government challan website and enter the right details",
-      "Scrape challan information and return it to the admin panel via API",
+      "Fetch challans from every required portal automatically by vehicle number",
+      "Deduplicate results and submit them to the Cars24 admin panel via the Challan Service API",
+      "Scale toward ~2,000 inspections/day reliably — not a single-user local tool",
     ],
     approach:
-      "I built this end to end with Claude assistance — using AI to generate and debug automation logic while I designed the flow, integrated the pieces, and tested each website's quirks until the scraping was reliable.",
+      "Built with AI assistance as a Node.js automation engine: Playwright (headless Chrome) scrapers run in parallel, jobs distribute through a BullMQ/Redis queue across EC2 workers, and traffic routes through Bright Data proxies so government sites don't block the cloud IP. Results land in MongoDB before being pushed to the admin panel. I worked portal-by-portal until the scraping held up.",
     workflow: [
-      { label: "Input vehicle number", detail: "Registration no. entered in the admin panel" },
-      { label: "Add chassis / engine", detail: "Supplied where a portal requires it" },
-      { label: "Visit gov websites", detail: "Playwright navigates each portal" },
-      { label: "Enter details & scrape", detail: "Fills forms, reads back challan data" },
-      { label: "Return via API", detail: "Scraped data sent back to the admin panel" },
+      { label: "Input vehicle number", detail: "Reg number entered by the QC operator" },
+      { label: "Queue the job", detail: "BullMQ/Redis distributes work across EC2 workers" },
+      { label: "Scrape in parallel", detail: "Playwright hits 10+ portals via Bright Data proxy" },
+      { label: "Deduplicate", detail: "Findings merged across portals, stored in MongoDB" },
+      { label: "Submit to panel", detail: "Pushed to the admin panel via Challan Service API" },
     ],
-    tools: ["Playwright", "Claude", "Frontend", "Backend", "APIs", "Browser Automation"],
+    tools: ["Playwright", "Node.js", "BullMQ / Redis", "MongoDB", "Bright Data Proxy", "AWS EC2"],
     implementation:
-      "A full-cycle AI-assisted build: I owned the frontend, backend, Playwright automation, and API integration myself, using Claude to accelerate the code and work through the edge cases of each government site.",
+      "A Node.js multi-scraper engine: Playwright headless-Chrome scrapers for 10+ government portals running in parallel, a BullMQ/Redis job queue across EC2 workers, Bright Data proxy routing (datacenter with residential fallback) to avoid IP blocks, MongoDB storage, and submission to Cars24's existing Challan Service API — built and tested portal-by-portal with AI assistance.",
     impact: [
-      "Reduced repetitive manual challan-lookup effort",
-      "Created a structured way to fetch challan data from multiple websites",
-      "Made a previously manual, error-prone task consistent and repeatable",
+      "Cut per-vehicle challan lookup from 9+ minutes to under 4",
+      "Targets a challan miss rate under 1% (from 8–12% manual)",
+      "Lets a 30-operator QC team clear ~2,000 inspections/day instead of stalling near 500",
     ],
     learnings: [
-      "AI assistance makes a single person genuinely full-cycle — I shipped FE, BE, and automation together",
-      "Government sites are inconsistent; reliable scraping is mostly edge-case handling",
-      "Designing the flow first made the automation far easier to debug",
+      "Government portals are inconsistent — reliable scraping is mostly edge-case and CAPTCHA handling",
+      "Parallel execution plus a job queue is what turns a local prototype into something that scales",
+      "Cloud scraping needs proxy routing, or government sites block the server outright",
+    ],
+    repos: [
+      { label: "challan-fetch-automation", url: "https://github.com/Yogi2809/challan-fetch-automation" },
     ],
   },
   {
@@ -304,6 +307,11 @@ export const initiatives: Initiative[] = [
       "The best automation targets are the boring tasks people repeat daily",
       "One repo per task keeps each automation easy to maintain and hand over",
       "An automation only sticks if the team can run it without me",
+    ],
+    repos: [
+      { label: "challan-ticket-closure-automation", url: "https://github.com/Yogi2809/challan-ticket-closure-automation" },
+      { label: "zendesk-agent-report-automation", url: "https://github.com/Yogi2809/zendesk-agent-report-automation" },
+      { label: "ra-cj-details-automation", url: "https://github.com/Yogi2809/ra-cj-details-automation" },
     ],
   },
 ];

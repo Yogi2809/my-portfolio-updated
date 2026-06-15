@@ -260,6 +260,22 @@
 }
 .init-open svg { transition: transform 0.25s; }
 .init-card:hover .init-open svg { transform: translateX(4px); }
+.init-repos { display: flex; flex-wrap: wrap; gap: 8px; }
+.init-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-size: 12.5px;
+  font-family: var(--font-mono, monospace);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.init-repo:hover { border-color: var(--accent); color: var(--accent-soft); background: var(--accent-dim); }
+.init-repo svg { flex-shrink: 0; }
 @media (max-width: 880px) { .init-grid { grid-template-columns: 1fr; } }
 
 /* ════ Initiative Detail page ═══════════════════════════════════════════ */
@@ -282,6 +298,21 @@
 .detail-hero h1 { font-size: clamp(30px, 4.6vw, 52px); margin: 14px 0 18px; letter-spacing: -0.02em; }
 .detail-hero .tagline { color: var(--muted); font-size: 18px; max-width: 680px; }
 .detail-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.detail-repos { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.detail-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-size: 13px;
+  font-family: var(--font-mono, monospace);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.detail-repo:hover { border-color: var(--accent); color: var(--accent-soft); background: var(--accent-dim); }
 .detail-body { padding: 70px 0 110px; display: grid; gap: 56px; }
 .detail-block h2 {
   font-size: 14px;
