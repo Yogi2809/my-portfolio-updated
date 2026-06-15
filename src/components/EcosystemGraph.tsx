@@ -34,7 +34,7 @@ const EcosystemGraph = () => {
     let angle = 0;
     let userActive = false;
     let raf: number;
-    const distance = 320;
+    const distance = 245;
 
     const onDown = () => (userActive = true);
     const el = wrapRef.current;
@@ -86,7 +86,7 @@ const EcosystemGraph = () => {
           const color = GROUP_COLORS[node.group] ?? "#ededf2";
 
           const sphere = new THREE.Mesh(
-            new THREE.SphereGeometry(node.size * 0.45, 16, 16),
+            new THREE.SphereGeometry(node.size * 0.62, 16, 16),
             new THREE.MeshBasicMaterial({
               color,
               transparent: true,
@@ -97,15 +97,15 @@ const EcosystemGraph = () => {
 
           // Soft glow halo
           const halo = new THREE.Mesh(
-            new THREE.SphereGeometry(node.size * 0.75, 16, 16),
+            new THREE.SphereGeometry(node.size * 0.98, 16, 16),
             new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.12 })
           );
           group.add(halo);
 
           const label = new SpriteText(node.id);
           label.color = node.group === 0 ? "#ff8fb0" : "#ffffff";
-          label.textHeight = node.group === 0 ? 6.5 : 4.2;
-          label.position.set(0, node.size * 0.45 + 5, 0);
+          label.textHeight = node.group === 0 ? 8.5 : 5.6;
+          label.position.set(0, node.size * 0.62 + 6, 0);
           label.fontFace = "Geist, Arial, sans-serif";
           // Dark backing pill so labels stay legible over the warp streaks
           label.backgroundColor = "rgba(8,13,26,0.72)";

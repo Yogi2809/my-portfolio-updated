@@ -140,7 +140,7 @@
 }
 .hero-visual {
   position: relative;
-  height: min(560px, 70vh);
+  height: min(660px, 80vh);
   border-radius: var(--radius-lg);
   overflow: hidden;
   /* Calm radial backdrop so the node constellation reads over the warp */
